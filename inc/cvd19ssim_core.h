@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#include "cvd19ssim_entity_mvmnt.h"
 
 typedef struct _cur_population_stat {
 
@@ -18,22 +19,25 @@ typedef struct _cur_population_stat {
 
 typedef struct _entity_health_record
 {
-
     uint32_t enitity_id;
     bool is_alive;
     bool is_infected;
+    bool is_quarantined;
     bool is_recovered;
-
+    cvd19ssim_entity_mvmnt_t pos_data;
+    uint8_t prob_early_death;
+    uint8_t prob_better_immunity;
 
 } entity_health_record_t;
-
 
 
 typedef struct _cvd19ssim_core {
 
     uint32_t                city_space;
     cur_population_stat_t   population_data;
-
+    entity_health_record_t  *entities;
+    uint32_t                num_of_hospitals_in_city;
+    uint32_t                capacity_per_hospital;
 
 };
 
