@@ -17,8 +17,8 @@ typedef struct _cur_population_stat {
 } cur_population_stat_t;
 
 
-typedef struct _entity_health_record
-{
+typedef struct _entity_health_record {
+    
     uint32_t enitity_id;
     bool is_alive;
     bool is_infected;
