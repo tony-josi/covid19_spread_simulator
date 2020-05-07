@@ -22,7 +22,7 @@ while(1)
 
     covid deaths
         loop through covid infected
-            function of immunity and whether hospitalised or not and randomness
+            function of low immunity, whether hospitalised or not, days of infections (> 28 days) and randomness
 
     new births
         should be less than max. popl. limit
@@ -44,5 +44,7 @@ while(1)
         all +ve tests subjects are hospitalized
 
     recovery
+        loop through all infected
+        recovery is a function of immunity and days of infection (< 14 days)
 
 */
