@@ -30,11 +30,11 @@ typedef struct _cvd19ssim_core_covid_entity_report {
 
 typedef struct _entity_health_record {
 
-    cvd19ssim_entity_mvmnt_t pos_data;
-    cvd19ssim_core_covid_entity_report_t entity_cvd_report;
-    bool is_alive;
-    uint8_t prob_early_death;
-    uint8_t prob_better_immunity;
+    cvd19ssim_entity_mvmnt_t                pos_data;
+    cvd19ssim_core_covid_entity_report_t    entity_cvd_report;
+    bool                                    is_alive;
+    uint8_t                                 prob_early_death;
+    uint8_t                                 prob_better_immunity;
 
 } entity_health_record_t;
 
