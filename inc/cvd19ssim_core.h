@@ -18,7 +18,7 @@ typedef struct _cur_population_stat {
 
 
 typedef struct _entity_health_record {
-    
+
     uint32_t enitity_id;
     bool is_alive;
     bool is_infected;
@@ -38,6 +38,7 @@ typedef struct _cvd19ssim_core {
     entity_health_record_t  *entities;
     uint32_t                num_of_hospitals_in_city;
     uint32_t                capacity_per_hospital;
+    uint32_t                cur_filled_hospital_capacity;
 
 };
 

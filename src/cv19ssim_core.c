@@ -10,6 +10,7 @@ new data struct.:
     covid_health_record
         have_symptoms?
         is_tested?
+        days_of_infections
 
 
 while(1)
@@ -19,14 +20,20 @@ while(1)
         death for non infected persons
         loop through non covid & recvered 
             death is functions of global death rate, immunity & random selection
+                mark is_alive false
 
     covid deaths
         loop through covid infected
             function of low immunity, whether hospitalised or not, days of infections (> 28 days) and randomness
+                mark is_alive false
+                if death was from hospital
+                    decrease from cur_filled_hosp_capacity
 
     new births
         should be less than max. popl. limit
         based on randomness and birth rate
+            loop from beginning of the entities
+            mark the first non_alive as alive
 
     movement
         loop through all non hospitalised
@@ -41,10 +48,17 @@ while(1)
         no. of tests done should be in the range [noof. with symptoms, max tests available]
 
     hospitalization
-        all +ve tests subjects are hospitalized
+        if cur_filled_hosp_capacity < num_of_hospitals_in_city * capacity_per_hospital
+            all +ve tests subjects are hospitalized
+        else 
+            avail. part of all +ve tests subjects are hospitalized
+        increment cur_filled_hosp_capacity by +ve cases admitted
+
 
     recovery
         loop through all infected
         recovery is a function of immunity and days of infection (< 14 days)
+            if recovry was from hospital
+                decrease from cur_filled_hosp_capacity
 
 */
