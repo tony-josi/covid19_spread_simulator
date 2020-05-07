@@ -8,6 +8,7 @@
 typedef struct _cur_population_stat {
 
     uint32_t max_allowed_population_in_city;
+    uint32_t baseline_popl_drop_by_normal_death;
     uint32_t cur_population;
     uint32_t total_infected;
     uint32_t total_recovered;

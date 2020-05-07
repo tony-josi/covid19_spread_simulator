@@ -21,7 +21,7 @@
     while(1)
 
         new normal deaths
-            total popl. greater than min popl.
+            total cur_population should be greater than max baseline_popl_drop_by_normal_death
             death for non infected persons
             loop through non covid & recvered 
                 death is functions of global death rate, immunity, prob_early_death & random selection
@@ -73,3 +73,8 @@
             update total_recovered
 
 */
+
+
+misc. data:
+    death rate needs to be equal to death rate?
+    
