@@ -16,15 +16,25 @@ typedef struct _cur_population_stat {
 
 } cur_population_stat_t;
 
+typedef struct _cvd19ssim_core_covid_entity_report {
 
-typedef struct _entity_health_record {
-
-    uint32_t enitity_id;
-    bool is_alive;
     bool is_infected;
     bool is_quarantined;
     bool is_recovered;
+    bool is_hospitalized;
+    bool have_symptoms;
+    bool is_tested;
+    bool days_of_infections;
+
+} cvd19ssim_core_covid_entity_report_t;
+
+
+typedef struct _entity_health_record {
+
     cvd19ssim_entity_mvmnt_t pos_data;
+    cvd19ssim_core_covid_entity_report_t entity_cvd_report;
+    uint32_t enitity_id;
+    bool is_alive;
     uint8_t prob_early_death;
     uint8_t prob_better_immunity;
 
@@ -39,8 +49,10 @@ typedef struct _cvd19ssim_core {
     uint32_t                num_of_hospitals_in_city;
     uint32_t                capacity_per_hospital;
     uint32_t                cur_filled_hospital_capacity;
+    uint8_t                 avg_death_rate;
+    uint8_t                 avg_birth_rate;
 
-};
+} cvd19ssim_core_t;
 
 
 #endif /* _CVD19SSIM_CORE_H */

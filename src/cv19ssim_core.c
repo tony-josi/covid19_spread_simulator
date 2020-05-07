@@ -3,15 +3,6 @@
 // main driver
 /*
 
-new data struct.:
-    is_hospitalized?
-    normal death rate
-    normal birth rate
-    covid_health_record
-        have_symptoms?
-        is_tested?
-        days_of_infections
-
 
 while(1)
 
@@ -19,7 +10,7 @@ while(1)
         total popl. greater than min popl.
         death for non infected persons
         loop through non covid & recvered 
-            death is functions of global death rate, immunity & random selection
+            death is functions of global death rate, immunity, prob_early_death & random selection
                 mark is_alive false
 
     covid deaths
