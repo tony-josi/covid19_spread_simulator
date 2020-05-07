@@ -1,4 +1,4 @@
-// sudo code
+// pseudo code
 
 // main driver
 /*
