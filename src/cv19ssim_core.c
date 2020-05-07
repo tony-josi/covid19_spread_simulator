@@ -11,6 +11,7 @@ new data struct.:
 while(1)
 
     new deaths
+        total popl. greater than min popl.
         death for non infected persons
         loop through non covid & recvered 
             death is functions of global death rate, immunity & random selection
@@ -24,8 +25,12 @@ while(1)
         based on randomness and birth rate
 
     movement
+        loop through all non hospitalised
+        movment based on acceleration and random sign for movemnt (forward and backward in (x, y))
 
     new infections
+        loop through all non infected (recovered not included)
+        
 
     diagnosis
 
