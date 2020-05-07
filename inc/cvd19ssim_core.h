@@ -49,6 +49,7 @@ typedef struct _cvd19ssim_core {
     uint32_t                num_of_hospitals_in_city;
     uint32_t                capacity_per_hospital;
     uint32_t                cur_filled_hospital_capacity;
+    uint32_t                max_spread_distance;
     uint8_t                 avg_death_rate;
     uint8_t                 avg_birth_rate;
 
