@@ -7,6 +7,10 @@ new data struct.:
     is_hospitalized?
     normal death rate
     normal birth rate
+    covid_health_record
+        have_symptoms?
+        is_tested?
+
 
 while(1)
 
@@ -30,11 +34,14 @@ while(1)
 
     new infections
         loop through all non infected (recovered not included)
-        
+        infection is a func. of min. spread distance and immunity and randomness
 
     diagnosis
+        loop through all people with symptoms and test random numbers
+        no. of tests done should be in the range [noof. with symptoms, max tests available]
 
     hospitalization
+        all +ve tests subjects are hospitalized
 
     recovery
 
