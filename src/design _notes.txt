@@ -26,7 +26,7 @@
             loop through non covid & recvered 
                 death is functions of global death rate, immunity, prob_early_death & random selection
                     mark is_alive false
-            update cur_population, total_other_deaths
+            update cur_population
 
         covid deaths
             loop through covid infected

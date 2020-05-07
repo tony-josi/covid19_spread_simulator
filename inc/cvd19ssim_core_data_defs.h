@@ -7,5 +7,13 @@
 
 #define MIN_ACCELERATION                    5
 
+#define MAX_PROB_OF_EARLY_NORMAL_DEATH      60
+
+#define MIN_PROB_OF_EARLY_NORMAL_DEATH      10
+
+#define MAX_PROB_OF_BETTER_IMMUNITY         70
+
+#define MIN_PROB_OF_BETTER_IMMUNITY         30
+
 
 #endif /* _CVD19SSIM_CORE_DEFS_H */
