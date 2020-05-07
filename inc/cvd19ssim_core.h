@@ -33,7 +33,6 @@ typedef struct _entity_health_record {
 
     cvd19ssim_entity_mvmnt_t pos_data;
     cvd19ssim_core_covid_entity_report_t entity_cvd_report;
-    uint32_t enitity_id;
     bool is_alive;
     uint8_t prob_early_death;
     uint8_t prob_better_immunity;
@@ -46,6 +45,7 @@ typedef struct _cvd19ssim_core {
     uint32_t                city_space;
     cur_population_stat_t   population_data;
     entity_health_record_t  *entities;
+    uint64_t                master_entity_counter;
     uint32_t                num_of_hospitals_in_city;
     uint32_t                capacity_per_hospital;
     uint32_t                cur_filled_hospital_capacity;
