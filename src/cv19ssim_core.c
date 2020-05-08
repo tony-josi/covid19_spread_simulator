@@ -1,55 +1,39 @@
-// pseudo code
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+#include "../inc/cvd19ssim_core.h"
 
-// main driver
-/*
+CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
+    
+    srand(time(0)); 
+    cvd19ssim_core_t hCVD19;
+    cvd19ssim_core_t_init(&hCVD19);
 
+}
 
-while(1)
+CVD19SSIM_STATUS_t cvd19ssim_core_t_init(cvd19ssim_core_t *HCVD19) {
+    /* should read params from file or call master
+    func. with struct feild values */
+    HCVD19->avg_birth_rate = 2 + RAND_GEN(2);
+    HCVD19->avg_death_rate = 2 + RAND_GEN(2);
+    HCVD19->capacity_per_hospital = 20;
+    HCVD19->num_of_hospitals_in_city = 4;
+    HCVD19->city_space = 108;
+    HCVD19->cur_filled_hospital_capacity = 0;
+    HCVD19->population_data.max_allowed_population_in_city = 500;
+    HCVD19->population_data.cur_population = \
+    HCVD19->population_data.max_allowed_population_in_city - RAND_GEN(100);
+    HCVD19->population_data.total_population = \
+    HCVD19->population_data.cur_population;
+    HCVD19->population_data.total_infected = 0;
+    HCVD19->population_data.total_infected_n_died = 0;
+    HCVD19->population_data.total_recovered = 0;
+    HCVD19->max_spread_distance = 3;
+    
+    if(!(HCVD19->entities = 
+    malloc(sizeof(entity_health_record_t) * HCVD19->population_data.max_allowed_population_in_city)))
+        return CVD19SSIM_FAIL;
 
-    new deaths
-        total popl. greater than min popl.
-        death for non infected persons
-        loop through non covid & recvered 
-            death is functions of global death rate, immunity, prob_early_death & random selection
-                mark is_alive false
+    return CVD19SSIM_SUCCESS;
 
-    covid deaths
-        loop through covid infected
-            function of low immunity, whether hospitalised or not, days of infections (> 28 days) and randomness
-                mark is_alive false
-                if death was from hospital
-                    decrease from cur_filled_hosp_capacity
-
-    new births
-        should be less than max. popl. limit
-        based on randomness and birth rate
-            loop from beginning of the entities
-            mark the first non_alive as alive
-
-    movement
-        loop through all non hospitalised
-        movment based on acceleration and random sign for movemnt (forward and backward in (x, y))
-
-    new infections
-        loop through all non infected (recovered not included)
-        infection is a func. of min. spread distance and immunity and randomness
-
-    diagnosis
-        loop through all people with symptoms and test random numbers
-        no. of tests done should be in the range [noof. with symptoms, max tests available]
-
-    hospitalization
-        if cur_filled_hosp_capacity < num_of_hospitals_in_city * capacity_per_hospital
-            all +ve tests subjects are hospitalized
-        else 
-            avail. part of all +ve tests subjects are hospitalized
-        increment cur_filled_hosp_capacity by +ve cases admitted
-
-
-    recovery
-        loop through all infected
-        recovery is a function of immunity and days of infection (< 14 days)
-            if recovry was from hospital
-                decrease from cur_filled_hosp_capacity
-
-*/
+}
