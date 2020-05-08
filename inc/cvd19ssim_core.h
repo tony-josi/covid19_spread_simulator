@@ -5,6 +5,14 @@
 #include <stdbool.h>
 #include "cvd19ssim_entity_mvmnt.h"
 
+#ifndef EXIT_SUCCESS
+#define EXIT_SUCCESS                    0
+#endif
+
+#ifndef EXIT_FAILURE
+#define EXIT_FAILURE                    (-1)
+#endif
+
 typedef enum {
     CVD19SSIM_SUCCESS = 0,
     CVD19SSIM_PROGRESS,
