@@ -21,12 +21,11 @@
     while(1)
 
         new normal deaths
-            total cur_population should be greater than max baseline_popl_drop_by_normal_death
-                death for non infected persons
-                loop through non covid & recvered & alive
-                    death is functions of global death rate, immunity, prob_early_death & random selection
-                        mark is_alive false
-                update cur_population
+            normal death for non infected persons
+            loop through non covid & recvered & alive
+                death is functions of global death rate, immunity, prob_early_death & random selection
+                    mark is_alive false
+            update cur_population
 
         covid deaths
             loop through covid infected & alive
@@ -77,4 +76,6 @@
 
 misc. data:
     death rate needs to be equal to death rate?
+    acceleration in both x, y should be 1 unit for better visual rep (only sign changes)
+
     
