@@ -74,6 +74,8 @@ typedef struct _cvd19ssim_core {
 
 #define RAND_GEN(N)                     (int)((double)rand() / ((double)RAND_MAX + 1) * N)
 
+#define UNUSED(X)                       (void)X      /* To avoid gcc/g++ warnings */
+
 CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN();
 CVD19SSIM_STATUS_t cvd19ssim_core_t_init(cvd19ssim_core_t *);
 CVD19SSIM_STATUS_t cvd19ssim_core_t_deinit(cvd19ssim_core_t *);
