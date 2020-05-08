@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "../inc/cvd19ssim_core.h"
 
-static void print_cvd19ssim_core_t_(cvd19ssim_core_t *);
+static void print_cvd19ssim_core_t(cvd19ssim_core_t *);
 
 CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
     
@@ -13,7 +13,7 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
     if(cvd19ssim_core_t_init(&hCVD19) != CVD19SSIM_SUCCESS)
         return CVD19SSIM_INIT_FAIL;
 
-    print_cvd19ssim_core_t_(&hCVD19);
+    UNUSED(print_cvd19ssim_core_t);
 
     if(cvd19ssim_core_t_deinit(&hCVD19) != CVD19SSIM_SUCCESS)
         return CVD19SSIM_INIT_FAIL;
@@ -57,7 +57,7 @@ CVD19SSIM_STATUS_t cvd19ssim_core_t_deinit(cvd19ssim_core_t *HCVD19) {
 
 }
 
-static void print_cvd19ssim_core_t_(cvd19ssim_core_t *HCVD19) {
+static void print_cvd19ssim_core_t(cvd19ssim_core_t *HCVD19) {
 
     printf("%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n",
     HCVD19->avg_birth_rate,
