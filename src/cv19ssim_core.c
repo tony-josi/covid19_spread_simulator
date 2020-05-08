@@ -7,7 +7,8 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
     
     srand(time(0)); 
     cvd19ssim_core_t hCVD19;
-    cvd19ssim_core_t_init(&hCVD19);
+    if(cvd19ssim_core_t_init(&hCVD19) != CVD19SSIM_PROGRESS)
+        return CVD19SSIM_INIT_FAIL;
 
 }
 
