@@ -8,7 +8,10 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
     srand(time(0)); 
     cvd19ssim_core_t hCVD19;
 
-    if(cvd19ssim_core_t_init(&hCVD19) != CVD19SSIM_PROGRESS)
+    if(cvd19ssim_core_t_init(&hCVD19) != CVD19SSIM_SUCCESS)
+        return CVD19SSIM_INIT_FAIL;
+
+    if(cvd19ssim_core_t_deinit(&hCVD19) != CVD19SSIM_SUCCESS)
         return CVD19SSIM_INIT_FAIL;
 
     return CVD19SSIM_SUCCESS;
@@ -38,6 +41,13 @@ CVD19SSIM_STATUS_t cvd19ssim_core_t_init(cvd19ssim_core_t *HCVD19) {
     malloc(sizeof(entity_health_record_t) * HCVD19->population_data.max_allowed_population_in_city)))
         return CVD19SSIM_FAIL;
 
+    return CVD19SSIM_SUCCESS;
+
+}
+
+CVD19SSIM_STATUS_t cvd19ssim_core_t_deinit(cvd19ssim_core_t *HCVD19) {
+
+    free(HCVD19->entities);
     return CVD19SSIM_SUCCESS;
 
 }

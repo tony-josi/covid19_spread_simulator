@@ -76,6 +76,7 @@ typedef struct _cvd19ssim_core {
 
 CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN();
 CVD19SSIM_STATUS_t cvd19ssim_core_t_init(cvd19ssim_core_t *);
+CVD19SSIM_STATUS_t cvd19ssim_core_t_deinit(cvd19ssim_core_t *);
 
 
 #endif /* _CVD19SSIM_CORE_H */
