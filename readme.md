@@ -17,7 +17,7 @@
 
 
 ### Main Loop
-* while(1)
+* **while(1)**
 
     * new normal deaths
         * normal death for non infected persons
@@ -26,54 +26,53 @@
                 * mark is_alive false
         * update cur_population
 
-    covid deaths
-        loop through covid infected & alive
-            function of low immunity, whether hospitalised or not, days of infections (> 28 days) and randomness
-                mark is_alive false
-                if death was from hospital
-                    decrease from cur_filled_hosp_capacity
-        update cur_population, total_infected_n_died
+    * covid deaths
+        * loop through covid infected & alive
+            f* unction of low immunity, whether hospitalised or not, days of infections (> 28 days) and randomness
+                * mark is_alive false
+                * if death was from hospital
+                    * decrease from cur_filled_hosp_capacity
+        * update cur_population, total_infected_n_died
 
-    new births
-        should be less than max. popl. limit
-            based on randomness and birth rate
-                loop from beginning of the entities
-                mark the first non_alive as alive
-                update total_population with new births
-            update cur_population
+    * new births
+       *  should be less than max. popl. limit
+            * based on randomness and birth rate
+                * loop from beginning of the entities
+                * mark the first non_alive as alive
+                * update total_population with new births
+            * update cur_population
 
-    movement
-        loop through all non hospitalised & alive
-            movment based on acceleration and random sign for movemnt (forward and backward in (x, y))
+    * movement
+        * loop through all non hospitalised & alive
+            * movment based on acceleration and random sign for movemnt (forward and backward in (x, y))
 
     new infections
         loop through all non infected (recovered not included) & alive
             infection is a func. of if inside max_spread_distance and immunity and randomness
 
-    diagnosis
-        loop through all people with symptoms and test random numbers and alive
-            no. of tests done should be in the range [noof. with symptoms, max tests available]
-            update total_infected
+    * diagnosis
+        * loop through all people with symptoms and test random numbers and alive
+            * no. of tests done should be in the range [noof. with symptoms, max tests available]
+            * update total_infected
 
-    hospitalization
-        if cur_filled_hosp_capacity < num_of_hospitals_in_city * capacity_per_hospital
-            all +ve tests subjects are hospitalized
-        else 
-            avail. part of all +ve tests subjects are hospitalized
-        increment cur_filled_hosp_capacity by +ve cases admitted
-
-
-    recovery
-        loop through all infected & alive
-            recovery is a function of immunity and days of infection (< 14 days)
-                if recovry was from hospital
-                    decrease from cur_filled_hosp_capacity
-            update total_recovered
-
-*/
+    * hospitalization
+        * if cur_filled_hosp_capacity < num_of_hospitals_in_city * capacity_per_hospital
+            * all +ve tests subjects are hospitalized
+        * else 
+            * avail. part of all +ve tests subjects are hospitalized
+        * increment cur_filled_hosp_capacity by +ve cases admitted
 
 
-misc. data:
-death rate needs to be equal to death rate?
-acceleration in both x, y should be 1 unit for better visual rep (only sign changes)
+    * recovery
+        * loop through all infected & alive
+            * recovery is a function of immunity and days of infection (< 14 days)
+                * if recovry was from hospital
+                    * decrease from cur_filled_hosp_capacity
+            * update total_recovered
+
+
+
+### misc. data:
+* death rate needs to be equal to death rate?
+* acceleration in both x, y should be 1 unit for better visual rep (only sign changes)
 
