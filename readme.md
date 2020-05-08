@@ -7,7 +7,7 @@
 * initial population count is between max popl and (max popl. - INIT_POPL_LOWER_LIMIT_DIFF)
     * init max_allowed_population_in_city
     * init total_population with this val
-* initialise initial popl\
+* initialise initial popl
     * alloc mem
     * init each entities cvd19ssim_entity_mvmnt_t pos with random val b/w city size
     init each entities cvd19ssim_entity_mvmnt_t accel within a range b/w MAX_ACCELERATION & MIN_ACCELERATION
@@ -28,7 +28,7 @@
 
     * covid deaths
         * loop through covid infected & alive
-            f* unction of low immunity, whether hospitalised or not, days of infections (> 28 days) and randomness
+            * function of low immunity, whether hospitalised or not, days of infections (> 28 days) and randomness
                 * mark is_alive false
                 * if death was from hospital
                     * decrease from cur_filled_hosp_capacity
