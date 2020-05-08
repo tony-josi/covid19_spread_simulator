@@ -2,7 +2,7 @@
 TARGET = cvd19ssim
 STD_LIBS = -lm
 CC = gcc
-CFLAGS = -std=c99 -pedantic -Wall -Wextra -Wformat -Ofast -march=native
+CFLAGS = -std=c99 -pedantic -Wall -Wextra -Wformat -Ofast -ggdb3
 LFLAGS = -pedantic -Wall -Wextra 
 CFLAGS_STRICT = -std=c99 -Wall -pedantic -ggdb3 \
 -pedantic-errors -Wextra -Waggregate-return -Wcast-align \
