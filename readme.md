@@ -46,9 +46,9 @@
         * loop through all non hospitalised & alive
             * movment based on acceleration and random sign for movemnt (forward and backward in (x, y))
 
-    new infections
-        loop through all non infected (recovered not included) & alive
-            infection is a func. of if inside max_spread_distance and immunity and randomness
+    * new infections
+        * loop through all non infected (recovered not included) & alive
+            * infection is a func. of if inside max_spread_distance and immunity and randomness
 
     * diagnosis
         * loop through all people with symptoms and test random numbers and alive
