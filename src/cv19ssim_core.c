@@ -20,6 +20,7 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
         return CVD19SSIM_INIT_FAIL;
 
     UNUSED(print_cvd19ssim_core_t);
+    UNUSED(print_cvd19ssim_entity_health_record_t);
     /*
     UNUSED(print_cvd19ssim_core_t(&hCVD19));
     printf("__________________INIT   D O N E_______________________\n");
