@@ -6,6 +6,7 @@
 #include "../inc/cvd19ssim_ppm.h"
 
 static void print_cvd19ssim_core_t(cvd19ssim_core_t *);
+static void print_cvd19ssim_entity_health_record_t(cvd19ssim_core_t *, uint32_t);
 
 CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
     
@@ -18,7 +19,17 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
     if(cvd19ssim_core_t_init_entities(&hCVD19) != CVD19SSIM_SUCCESS)
         return CVD19SSIM_INIT_FAIL;
 
+    UNUSED(print_cvd19ssim_core_t);
+    /*
     UNUSED(print_cvd19ssim_core_t(&hCVD19));
+    printf("__________________INIT   D O N E_______________________\n");
+    for(uint32_t i = 0; i < hCVD19.population_data.cur_population; i++) {
+        printf("Entty: %d\n", i);
+        print_cvd19ssim_entity_health_record_t(&hCVD19, i);
+        printf("__________________INIT   D O N E_______________________\n");
+    }
+    */
+    
 
     if(cvd19ssim_core_t_deinit(&hCVD19) != CVD19SSIM_SUCCESS)
         return CVD19SSIM_INIT_FAIL;
@@ -91,9 +102,9 @@ CVD19SSIM_STATUS_t cvd19ssim_core_t_init_entities(cvd19ssim_core_t *HCVD19) {
 
         HCVD19->entities[i].is_alive = 1;
         HCVD19->entities[i].prob_early_death = MIN_PROB_OF_EARLY_NORMAL_DEATH + \
-        RAND_GEN(MAX_PROB_OF_EARLY_NORMAL_DEATH - MIN_PROB_OF_EARLY_NORMAL_DEATH);
+        RAND_GEN((MAX_PROB_OF_EARLY_NORMAL_DEATH - MIN_PROB_OF_EARLY_NORMAL_DEATH));
         HCVD19->entities[i].prob_better_immunity = MIN_PROB_OF_BETTER_IMMUNITY + \
-        RAND_GEN(MAX_PROB_OF_BETTER_IMMUNITY - MIN_PROB_OF_BETTER_IMMUNITY);
+        RAND_GEN((MAX_PROB_OF_BETTER_IMMUNITY - MIN_PROB_OF_BETTER_IMMUNITY));
 
         if(infected_cntr < HCVD19->initialy_infected) {
             HCVD19->entities[i].entity_cvd_report.is_infected = 1;
@@ -109,10 +120,8 @@ CVD19SSIM_STATUS_t cvd19ssim_core_t_init_entities(cvd19ssim_core_t *HCVD19) {
 
         HCVD19->entities[i].pos_data.cur_pos.x = RAND_GEN(MAX_BOARD_DEFAULT_SIZE);
         HCVD19->entities[i].pos_data.cur_pos.y = RAND_GEN(MAX_BOARD_DEFAULT_SIZE);
-        HCVD19->entities[i].pos_data.acceleration.x = MIN_ACCELERATION + \
-        RAND_GEN(MAX_ACCELERATION - MIN_ACCELERATION);
-        HCVD19->entities[i].pos_data.acceleration.y = MIN_ACCELERATION + \
-        RAND_GEN(MAX_ACCELERATION - MIN_ACCELERATION);
+        HCVD19->entities[i].pos_data.acceleration.x = 1;
+        HCVD19->entities[i].pos_data.acceleration.y = 1;
 
     }
 
@@ -120,3 +129,22 @@ CVD19SSIM_STATUS_t cvd19ssim_core_t_init_entities(cvd19ssim_core_t *HCVD19) {
 
 }
 
+static void print_cvd19ssim_entity_health_record_t(cvd19ssim_core_t *HCVD19, uint32_t idx) {
+
+    printf("%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n",
+    HCVD19->entities[idx].is_alive,
+    HCVD19->entities[idx].prob_better_immunity,
+    HCVD19->entities[idx].prob_early_death,
+    HCVD19->entities[idx].pos_data.cur_pos.x,
+    HCVD19->entities[idx].pos_data.cur_pos.y,
+    HCVD19->entities[idx].pos_data.acceleration.x,
+    HCVD19->entities[idx].pos_data.acceleration.y,
+    HCVD19->entities[idx].entity_cvd_report.days_of_infections,
+    HCVD19->entities[idx].entity_cvd_report.have_symptoms,
+    HCVD19->entities[idx].entity_cvd_report.is_hospitalized,
+    HCVD19->entities[idx].entity_cvd_report.is_infected,
+    HCVD19->entities[idx].entity_cvd_report.is_quarantined,
+    HCVD19->entities[idx].entity_cvd_report.is_recovered,
+    HCVD19->entities[idx].entity_cvd_report.is_tested);
+
+}

@@ -3,9 +3,9 @@
 
 #define INIT_POPL_LOWER_LIMIT_DIFF          100
 
-#define MAX_ACCELERATION                    10
+#define MAX_ACCELERATION                    3
 
-#define MIN_ACCELERATION                    5
+#define MIN_ACCELERATION                    0
 
 #define MAX_PROB_OF_EARLY_NORMAL_DEATH      60
 
