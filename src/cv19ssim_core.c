@@ -4,7 +4,13 @@
 #include "../inc/cvd19ssim_core.h"
 #include "../inc/cvd19ssim_core_data_defs.h"
 #include "../inc/cvd19ssim_ppm.h"
+#include "../inc/cvd19ssim_entity_mvmnt.h"
 
+
+#ifndef _WIN32
+    static int sleep_in_ms(long);
+#endif
+static void sleep_ms();
 static void print_cvd19ssim_core_t(cvd19ssim_core_t *);
 static void print_cvd19ssim_entity_health_record_t(cvd19ssim_core_t *, uint32_t);
 
@@ -30,6 +36,18 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
         printf("__________________INIT   D O N E_______________________\n");
     }
     */
+
+    output_current_frame_ppm(&hCVD19);
+    while (1) {
+
+        sleep_ms();
+        if(pos_move(&hCVD19))
+            return CVD19SSIM_FAIL;
+
+        output_current_frame_ppm(&hCVD19);
+
+   }
+   
     
 
     if(cvd19ssim_core_t_deinit(&hCVD19) != CVD19SSIM_SUCCESS)
@@ -49,7 +67,7 @@ CVD19SSIM_STATUS_t cvd19ssim_core_t_init(cvd19ssim_core_t *HCVD19) {
     HCVD19->num_of_hospitals_in_city = 4;
     HCVD19->city_space = 108;
     HCVD19->cur_filled_hospital_capacity = 0;
-    HCVD19->population_data.max_allowed_population_in_city = 500;
+    HCVD19->population_data.max_allowed_population_in_city = 100;
     HCVD19->population_data.cur_population = \
     HCVD19->population_data.max_allowed_population_in_city - RAND_GEN(100);
     HCVD19->population_data.total_population = \
@@ -99,7 +117,7 @@ static void print_cvd19ssim_core_t(cvd19ssim_core_t *HCVD19) {
 CVD19SSIM_STATUS_t cvd19ssim_core_t_init_entities(cvd19ssim_core_t *HCVD19) {
 
     uint32_t infected_cntr = 0;
-    for (uint32_t i = 0; i < HCVD19->population_data.max_allowed_population_in_city; i++) {
+    for (uint32_t i = 0; i < HCVD19->population_data.cur_population; i++) {
 
         HCVD19->entities[i].is_alive = 1;
         HCVD19->entities[i].prob_early_death = MIN_PROB_OF_EARLY_NORMAL_DEATH + \
@@ -148,4 +166,33 @@ static void print_cvd19ssim_entity_health_record_t(cvd19ssim_core_t *HCVD19, uin
     HCVD19->entities[idx].entity_cvd_report.is_recovered,
     HCVD19->entities[idx].entity_cvd_report.is_tested);
 
+}
+
+#ifndef _WIN32
+    static int sleep_in_ms(long ms) {
+
+        struct timespec ts;
+        int res;
+
+        ts.tv_sec = ms / 1000;
+        ts.tv_nsec = (ms % 1000) * 1000000;
+
+        do {
+            res = nanosleep(&ts, &ts);
+        } while (res);
+
+        return res;
+    }
+#endif
+
+
+static void sleep_ms() {
+
+    /* if Windows system */
+    #ifdef _WIN32
+        Sleep(DEFAULT_SLEEP_TIME);
+    /* UNIX based systems */
+    #else
+        sleep_in_ms(DEFAULT_SLEEP_TIME);
+    #endif
 }

@@ -19,5 +19,7 @@
 
 #define PERCENT_OF_AFFECTED_WITH_SYMPTOMS   60
 
+#define DEFAULT_SLEEP_TIME                  20
+
 
 #endif /* _CVD19SSIM_CORE_DATA_DEFS_H */
