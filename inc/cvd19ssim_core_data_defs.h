@@ -17,5 +17,7 @@
 
 #define MIN_INITIALLY_INFECTED              5
 
+#define PERCENT_OF_AFFECTED_WITH_SYMPTOMS   60
+
 
 #endif /* _CVD19SSIM_CORE_DATA_DEFS_H */

@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "../inc/cvd19ssim_core.h"
 #include "../inc/cvd19ssim_core_data_defs.h"
+#include "../inc/cvd19ssim_ppm.h"
 
 static void print_cvd19ssim_core_t(cvd19ssim_core_t *);
 
@@ -12,6 +13,9 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
     cvd19ssim_core_t hCVD19;
 
     if(cvd19ssim_core_t_init(&hCVD19) != CVD19SSIM_SUCCESS)
+        return CVD19SSIM_INIT_FAIL;
+
+    if(cvd19ssim_core_t_init_entities(&hCVD19) != CVD19SSIM_SUCCESS)
         return CVD19SSIM_INIT_FAIL;
 
     UNUSED(print_cvd19ssim_core_t(&hCVD19));
@@ -80,4 +84,39 @@ static void print_cvd19ssim_core_t(cvd19ssim_core_t *HCVD19) {
 
 }
 
+CVD19SSIM_STATUS_t cvd19ssim_core_t_init_entities(cvd19ssim_core_t *HCVD19) {
+
+    uint32_t infected_cntr = 0;
+    for (uint32_t i = 0; i < HCVD19->population_data.cur_population; i++) {
+
+        HCVD19->entities[i].is_alive = 1;
+        HCVD19->entities[i].prob_early_death = MIN_PROB_OF_EARLY_NORMAL_DEATH + \
+        RAND_GEN(MAX_PROB_OF_EARLY_NORMAL_DEATH - MIN_PROB_OF_EARLY_NORMAL_DEATH);
+        HCVD19->entities[i].prob_better_immunity = MIN_PROB_OF_BETTER_IMMUNITY + \
+        RAND_GEN(MAX_PROB_OF_BETTER_IMMUNITY - MIN_PROB_OF_BETTER_IMMUNITY);
+
+        if(infected_cntr < HCVD19->initialy_infected) {
+            HCVD19->entities[i].entity_cvd_report.is_infected = 1;
+            ++infected_cntr;
+        }
+        HCVD19->entities[i].entity_cvd_report.days_of_infections = 0;
+        HCVD19->entities[i].entity_cvd_report.have_symptoms = \
+        (RAND_GEN(100) < PERCENT_OF_AFFECTED_WITH_SYMPTOMS) ? 1 : 0;
+        HCVD19->entities[i].entity_cvd_report.is_hospitalized = 0;
+        HCVD19->entities[i].entity_cvd_report.is_quarantined = 0;
+        HCVD19->entities[i].entity_cvd_report.is_recovered = 0;
+        HCVD19->entities[i].entity_cvd_report.is_tested = 0;
+
+        HCVD19->entities[i].pos_data.cur_pos.x = RAND_GEN(MAX_BOARD_DEFAULT_SIZE);
+        HCVD19->entities[i].pos_data.cur_pos.y = RAND_GEN(MAX_BOARD_DEFAULT_SIZE);
+        HCVD19->entities[i].pos_data.acceleration.x = MIN_ACCELERATION + \
+        RAND_GEN(MAX_ACCELERATION - MIN_ACCELERATION);
+        HCVD19->entities[i].pos_data.acceleration.y = MIN_ACCELERATION + \
+        RAND_GEN(MAX_ACCELERATION - MIN_ACCELERATION);
+
+    }
+
+    return CVD19SSIM_SUCCESS;
+
+}
 
