@@ -78,9 +78,11 @@
 
 ### TO DO:
 
-* pos_mov()
-* generate ppm frames in loop with pos_mov()
 * hb people infected with cvd in hospitals (in map?)
+* when deaths make is_alive false
+    * decrement cur_population
+* when births loop from beginning, make one alive, reset the struct feilds, if no dead found init new
+    * increment cur_population
 
 ### Build & Run:
 
