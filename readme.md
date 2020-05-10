@@ -76,3 +76,6 @@
 * death rate needs to be equal to death rate?
 * acceleration in both x, y should be 1 unit for better visual rep (only sign changes)
 
+### TO DO:
+* pos_mov()
+* generate ppm frames in loop with pos_mov()

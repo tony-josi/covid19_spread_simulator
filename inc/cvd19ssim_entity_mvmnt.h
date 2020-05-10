@@ -19,6 +19,6 @@ int pos_init_position(position_t *, uint32_t, uint32_t);
 int pos_add_2_postions_to_first(position_t *, position_t *);
 int pos_scale_position(position_t *, uint32_t);
 uint32_t pos_calc_distance(position_t, position_t);
-int pos_move(position_t *);
+int pos_move(cvd19ssim_entity_mvmnt_t *);
 
 #endif /* _CVD19SSIM_ENTITY_MVMNT_H */
