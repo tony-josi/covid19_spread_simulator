@@ -15,5 +15,7 @@
 
 #define MIN_PROB_OF_BETTER_IMMUNITY         30
 
+#define MIN_INITIALLY_INFECTED              5
+
 
 #endif /* _CVD19SSIM_CORE_DATA_DEFS_H */

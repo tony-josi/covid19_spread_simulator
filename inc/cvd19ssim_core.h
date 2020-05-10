@@ -67,6 +67,7 @@ typedef struct _cvd19ssim_core {
     uint32_t                capacity_per_hospital;
     uint32_t                cur_filled_hospital_capacity;
     uint32_t                max_spread_distance;
+    uint32_t                initialy_infected;
     uint8_t                 avg_death_rate;
     uint8_t                 avg_birth_rate;
 
@@ -78,6 +79,7 @@ typedef struct _cvd19ssim_core {
 
 CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN();
 CVD19SSIM_STATUS_t cvd19ssim_core_t_init(cvd19ssim_core_t *);
+CVD19SSIM_STATUS_t cvd19ssim_core_t_init_entities(cvd19ssim_core_t *);
 CVD19SSIM_STATUS_t cvd19ssim_core_t_deinit(cvd19ssim_core_t *);
 
 

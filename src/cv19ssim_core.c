@@ -2,6 +2,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include "../inc/cvd19ssim_core.h"
+#include "../inc/cvd19ssim_core_data_defs.h"
 
 static void print_cvd19ssim_core_t(cvd19ssim_core_t *);
 
@@ -13,7 +14,7 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
     if(cvd19ssim_core_t_init(&hCVD19) != CVD19SSIM_SUCCESS)
         return CVD19SSIM_INIT_FAIL;
 
-    UNUSED(print_cvd19ssim_core_t);
+    UNUSED(print_cvd19ssim_core_t(&hCVD19));
 
     if(cvd19ssim_core_t_deinit(&hCVD19) != CVD19SSIM_SUCCESS)
         return CVD19SSIM_INIT_FAIL;
@@ -37,7 +38,9 @@ CVD19SSIM_STATUS_t cvd19ssim_core_t_init(cvd19ssim_core_t *HCVD19) {
     HCVD19->population_data.max_allowed_population_in_city - RAND_GEN(100);
     HCVD19->population_data.total_population = \
     HCVD19->population_data.cur_population;
-    HCVD19->population_data.total_infected = 0;
+    HCVD19->initialy_infected = MIN_INITIALLY_INFECTED + \
+    RAND_GEN(HCVD19->population_data.cur_population / 20);
+    HCVD19->population_data.total_infected = HCVD19->initialy_infected;
     HCVD19->population_data.total_infected_n_died = 0;
     HCVD19->population_data.total_recovered = 0;
     HCVD19->max_spread_distance = 3;
@@ -59,7 +62,7 @@ CVD19SSIM_STATUS_t cvd19ssim_core_t_deinit(cvd19ssim_core_t *HCVD19) {
 
 static void print_cvd19ssim_core_t(cvd19ssim_core_t *HCVD19) {
 
-    printf("%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n",
+    printf("%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n",
     HCVD19->avg_birth_rate,
     HCVD19->avg_death_rate,
     HCVD19->capacity_per_hospital,
@@ -68,6 +71,7 @@ static void print_cvd19ssim_core_t(cvd19ssim_core_t *HCVD19) {
     HCVD19->cur_filled_hospital_capacity,
     HCVD19->population_data.max_allowed_population_in_city,
     HCVD19->population_data.cur_population,
+    HCVD19->initialy_infected,
     HCVD19->population_data.total_population,
     HCVD19->population_data.total_infected,
     HCVD19->population_data.total_infected_n_died,
