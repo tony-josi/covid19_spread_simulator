@@ -2,16 +2,22 @@
 #define _CVD19SSIM_ENTITY_MVMNT_H
 
 #include <stdint.h>
+#include "../inc/cvd19ssim_core.h"
 
 typedef struct _position {
     uint32_t x;
     uint32_t y;
 } position_t;
 
+typedef struct _acceleration {
+    int x;
+    int y;
+} acceleration_t;
+
 typedef struct _cvd19ssim_entity_mvmnt {
 
-    position_t cur_pos;
-    position_t acceleration;
+    position_t      cur_pos;
+    acceleration_t  acceleration;
 
 } cvd19ssim_entity_mvmnt_t;
 
@@ -19,6 +25,6 @@ int pos_init_position(position_t *, uint32_t, uint32_t);
 int pos_add_2_postions_to_first(position_t *, position_t *);
 int pos_scale_position(position_t *, uint32_t);
 uint32_t pos_calc_distance(position_t, position_t);
-int pos_move(cvd19ssim_entity_mvmnt_t *);
+int pos_move(cvd19ssim_core_t *);
 
 #endif /* _CVD19SSIM_ENTITY_MVMNT_H */
