@@ -20,13 +20,16 @@ void output_current_frame_ppm(cvd19ssim_core_t *HCVD19) {
         if(HCVD19->entities[i].is_alive) {
 
             if(HCVD19->entities[i].entity_cvd_report.is_infected)
-                buf_set_pixel(HCVD19->entities[i].pos_data.cur_pos.y * PIXEL_SIZE, HCVD19->entities[i].pos_data.cur_pos.x * PIXEL_SIZE, colors[0]);
+                buf_set_pixel(HCVD19->entities[i].pos_data.cur_pos.y * PIXEL_SIZE, \
+                HCVD19->entities[i].pos_data.cur_pos.x * PIXEL_SIZE, colors[0]);
 
             else if(HCVD19->entities[i].entity_cvd_report.is_recovered)
-                buf_set_pixel(HCVD19->entities[i].pos_data.cur_pos.y * PIXEL_SIZE, HCVD19->entities[i].pos_data.cur_pos.x * PIXEL_SIZE, colors[1]);
+                buf_set_pixel(HCVD19->entities[i].pos_data.cur_pos.y * PIXEL_SIZE, \
+                HCVD19->entities[i].pos_data.cur_pos.x * PIXEL_SIZE, colors[1]);
 
             else
-                buf_set_pixel(HCVD19->entities[i].pos_data.cur_pos.y * PIXEL_SIZE, HCVD19->entities[i].pos_data.cur_pos.x * PIXEL_SIZE, colors[2]);
+                buf_set_pixel(HCVD19->entities[i].pos_data.cur_pos.y * PIXEL_SIZE, \
+                HCVD19->entities[i].pos_data.cur_pos.x * PIXEL_SIZE, colors[2]);
 
         }
     }
