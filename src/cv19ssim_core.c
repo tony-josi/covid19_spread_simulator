@@ -4,7 +4,6 @@
 #include "../inc/cvd19ssim_core.h"
 #include "../inc/cvd19ssim_core_data_defs.h"
 #include "../inc/cvd19ssim_ppm.h"
-#include "../inc/cvd19ssim_entity_mvmnt.h"
 
 
 #ifndef _WIN32

@@ -87,4 +87,5 @@
 ### Build & Run:
 
 `make`
+
 `./cvd19ssim | mpv --no-correct-pts --fps=5 -`

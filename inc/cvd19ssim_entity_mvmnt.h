@@ -2,7 +2,6 @@
 #define _CVD19SSIM_ENTITY_MVMNT_H
 
 #include <stdint.h>
-#include "cvd19ssim_core.h"
 
 typedef struct _position {
     uint32_t x;
