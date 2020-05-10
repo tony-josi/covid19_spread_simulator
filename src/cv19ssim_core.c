@@ -67,7 +67,7 @@ CVD19SSIM_STATUS_t cvd19ssim_core_t_init(cvd19ssim_core_t *HCVD19) {
     HCVD19->num_of_hospitals_in_city = 4;
     HCVD19->city_space = 108;
     HCVD19->cur_filled_hospital_capacity = 0;
-    HCVD19->population_data.max_allowed_population_in_city = 100;
+    HCVD19->population_data.max_allowed_population_in_city = MAX_ALLOWED_POPULATION;
     HCVD19->population_data.cur_population = \
     HCVD19->population_data.max_allowed_population_in_city - RAND_GEN(100);
     HCVD19->population_data.total_population = \
@@ -139,8 +139,8 @@ CVD19SSIM_STATUS_t cvd19ssim_core_t_init_entities(cvd19ssim_core_t *HCVD19) {
 
         HCVD19->entities[i].pos_data.cur_pos.x = RAND_GEN(MAX_CITY_DEFAULT_SIZE);
         HCVD19->entities[i].pos_data.cur_pos.y = RAND_GEN(MAX_CITY_DEFAULT_SIZE);
-        HCVD19->entities[i].pos_data.acceleration.x = 1;
-        HCVD19->entities[i].pos_data.acceleration.y = 1;
+        HCVD19->entities[i].pos_data.acceleration.x = 1 + RAND_GEN(2);
+        HCVD19->entities[i].pos_data.acceleration.y = 1 + RAND_GEN(2);
 
     }
 

@@ -1,6 +1,8 @@
 #ifndef _CVD19SSIM_CORE_DATA_DEFS_H
 #define _CVD19SSIM_CORE_DATA_DEFS_H
 
+#define MAX_ALLOWED_POPULATION              200
+
 #define INIT_POPL_LOWER_LIMIT_DIFF          100
 
 #define MAX_ACCELERATION                    3

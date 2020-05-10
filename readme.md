@@ -81,3 +81,8 @@
 * pos_mov()
 * generate ppm frames in loop with pos_mov()
 * hb people infected with cvd in hospitals (in map?)
+
+### Build & Run:
+
+`make`
+`./cvd19ssim | mpv --no-correct-pts --fps=5 -`

@@ -43,9 +43,9 @@ void buf_clear(void)
 void buf_set(int x, int y, long color)
 {
     if (x >= 0 && x < PPM_SIZE && y >= 0 && y < PPM_SIZE) {
-        ppm_buf[y*3L*PPM_SIZE + x*3L + 0] = color >> 16;
-        ppm_buf[y*3L*PPM_SIZE + x*3L + 1] = color >>  8;
-        ppm_buf[y*3L*PPM_SIZE + x*3L + 2] = color >>  0;
+        ppm_buf[y * 3L * PPM_SIZE + x * 3L + 0] = color >> 16;
+        ppm_buf[y * 3L * PPM_SIZE + x * 3L + 1] = color >>  8;
+        ppm_buf[y * 3L * PPM_SIZE + x * 3L + 2] = color >>  0;
     }
 }
 

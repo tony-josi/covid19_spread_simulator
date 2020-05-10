@@ -3,9 +3,9 @@
 
 #include "cvd19ssim_core.h"
 
-#define MAX_CITY_DEFAULT_SIZE          108
+#define MAX_CITY_DEFAULT_SIZE           270
 
-#define PIXEL_SIZE                      10
+#define PIXEL_SIZE                      4
 
 #define PPM_SIZE                        (MAX_CITY_DEFAULT_SIZE * PIXEL_SIZE)
 
