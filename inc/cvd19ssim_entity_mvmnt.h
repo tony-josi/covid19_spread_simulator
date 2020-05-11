@@ -16,7 +16,7 @@ typedef struct _speed {
 typedef struct _cvd19ssim_entity_mvmnt {
 
     position_t      cur_pos;
-    speed_t  speed;
+    speed_t         speed;
 
 } cvd19ssim_entity_mvmnt_t;
 
