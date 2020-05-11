@@ -8,15 +8,15 @@ typedef struct _position {
     uint32_t y;
 } position_t;
 
-typedef struct _acceleration {
+typedef struct _speed {
     int x;
     int y;
-} acceleration_t;
+} speed_t;
 
 typedef struct _cvd19ssim_entity_mvmnt {
 
     position_t      cur_pos;
-    acceleration_t  acceleration;
+    speed_t  speed;
 
 } cvd19ssim_entity_mvmnt_t;
 

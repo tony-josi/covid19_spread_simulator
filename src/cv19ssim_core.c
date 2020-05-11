@@ -138,8 +138,8 @@ CVD19SSIM_STATUS_t cvd19ssim_core_t_init_entities(cvd19ssim_core_t *HCVD19) {
 
         HCVD19->entities[i].pos_data.cur_pos.x = RAND_GEN(MAX_CITY_DEFAULT_SIZE);
         HCVD19->entities[i].pos_data.cur_pos.y = RAND_GEN(MAX_CITY_DEFAULT_SIZE);
-        HCVD19->entities[i].pos_data.acceleration.x = 1 + RAND_GEN(2);
-        HCVD19->entities[i].pos_data.acceleration.y = 1 + RAND_GEN(2);
+        HCVD19->entities[i].pos_data.speed.x = MIN_SPEED + RAND_GEN(((MAX_SPEED - MIN_SPEED) + 1));
+        HCVD19->entities[i].pos_data.speed.y = MIN_SPEED + RAND_GEN(((MAX_SPEED - MIN_SPEED) + 1));
 
     }
 
@@ -155,8 +155,8 @@ static void print_cvd19ssim_entity_health_record_t(cvd19ssim_core_t *HCVD19, uin
     HCVD19->entities[idx].prob_early_death,
     HCVD19->entities[idx].pos_data.cur_pos.x,
     HCVD19->entities[idx].pos_data.cur_pos.y,
-    HCVD19->entities[idx].pos_data.acceleration.x,
-    HCVD19->entities[idx].pos_data.acceleration.y,
+    HCVD19->entities[idx].pos_data.speed.x,
+    HCVD19->entities[idx].pos_data.speed.y,
     HCVD19->entities[idx].entity_cvd_report.days_of_infections,
     HCVD19->entities[idx].entity_cvd_report.have_symptoms,
     HCVD19->entities[idx].entity_cvd_report.is_hospitalized,
