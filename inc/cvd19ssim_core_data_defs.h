@@ -21,15 +21,19 @@
 
 #define PERCENT_OF_AFFECTED_WITH_SYMPTOMS   60
 
-#define DEFAULT_SLEEP_TIME                  10
+#define DEFAULT_SLEEP_TIME                  0
 
 #define STILL_FRAMES_AT_START               20
 
-#define PERCENT_OF_HIGH_SPEED               20
+#define PERCENT_OF_HIGH_SPEED               10
 
 #define HIGH_SPEED_POSSIBLE                 10
 
 #define PERCENT                             100
+
+#define PERCENT_CHANCE_BIRTHS_OCCUR         5
+
+#define PERCENT_CHANCE_DEATHS_OCCUR         5
 
 #define INVERSE_DEATH_CONSTANT              20
 

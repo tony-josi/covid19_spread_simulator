@@ -38,6 +38,7 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
 
         sleep_ms();
         cvd19ssim_normal_deaths(&hCVD19);
+        cvd19ssim_normal_births(&hCVD19);
         
         if(pos_move(&hCVD19))
             return CVD19SSIM_FAIL;
@@ -99,20 +100,25 @@ CVD19SSIM_STATUS_t cvd19ssim_core_t_deinit(cvd19ssim_core_t *HCVD19) {
 CVD19SSIM_STATUS_t cvd19ssim_normal_deaths(cvd19ssim_core_t *HCVD19) {
     uint32_t deaths_today = 0;
     //printf("DTH: %d\n", (NORMAL_DEATH_THRESHOLD));
-    for(uint32_t i = 0; ((i < HCVD19->population_data.max_allowed_population_in_city) & \
-    (deaths_today < HCVD19->avg_death_rate)); i++) {
-        if(HCVD19->entities[i].is_alive & \
-        ((HCVD19->entities[i].prob_better_immunity - HCVD19->entities[i].prob_early_death) < (NORMAL_DEATH_THRESHOLD))) {
-            HCVD19->entities[i].is_alive = 0;
-            deaths_today++;
+    if(HCVD19->population_data.cur_population > 0) {
+        if((RAND_GEN(PERCENT)) > (PERCENT - PERCENT_CHANCE_DEATHS_OCCUR)) {
+            for(uint32_t i = 0; ((i < HCVD19->population_data.max_allowed_population_in_city) & (deaths_today < HCVD19->avg_death_rate)); ++i) {
+                if(HCVD19->entities[i].is_alive & \
+                ((HCVD19->entities[i].prob_better_immunity - HCVD19->entities[i].prob_early_death) < (NORMAL_DEATH_THRESHOLD))) {
+                    HCVD19->entities[i].is_alive = 0;
+                    deaths_today++;
+                    HCVD19->population_data.cur_population -= 1;
+                    //printf("CAN: %d     %d      %d\n", i, (HCVD19->entities[i].prob_better_immunity - HCVD19->entities[i].prob_early_death), MAG((NORMAL_DEATH_THRESHOLD)));
+                }
+            }           
         }
     }
     return CVD19SSIM_SUCCESS;
 }
 
-/* CVD19SSIM_STATUS_t cvd19ssim_normal_births(cvd19ssim_core_t *HCVID19) {
+CVD19SSIM_STATUS_t cvd19ssim_normal_births(cvd19ssim_core_t *HCVID19) {
 
-} */
+}
 
 
 static void print_cvd19ssim_core_t(cvd19ssim_core_t *HCVD19) {
