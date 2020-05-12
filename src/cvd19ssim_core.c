@@ -12,6 +12,7 @@
 static void sleep_ms();
 static void print_cvd19ssim_core_t(cvd19ssim_core_t *);
 static void print_cvd19ssim_entity_health_record_t(cvd19ssim_core_t *, uint32_t);
+static void init_entity(entity_health_record_t *, uint32_t, bool);
 
 CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
     
@@ -104,11 +105,14 @@ CVD19SSIM_STATUS_t cvd19ssim_normal_deaths(cvd19ssim_core_t *HCVD19) {
         ((HCVD19->entities[i].prob_better_immunity - HCVD19->entities[i].prob_early_death) < (NORMAL_DEATH_THRESHOLD))) {
             HCVD19->entities[i].is_alive = 0;
             deaths_today++;
-            //printf("CAN: %d     %d      %d\n", i, (HCVD19->entities[i].prob_better_immunity - HCVD19->entities[i].prob_early_death), MAG((NORMAL_DEATH_THRESHOLD)));
         }
     }
     return CVD19SSIM_SUCCESS;
 }
+
+/* CVD19SSIM_STATUS_t cvd19ssim_normal_births(cvd19ssim_core_t *HCVID19) {
+
+} */
 
 
 static void print_cvd19ssim_core_t(cvd19ssim_core_t *HCVD19) {
@@ -135,30 +139,11 @@ CVD19SSIM_STATUS_t cvd19ssim_core_t_init_entities(cvd19ssim_core_t *HCVD19) {
 
     uint32_t infected_cntr = 0, i = 0;
     for (i = 0; i < HCVD19->population_data.cur_population; i++) {
-
-        HCVD19->entities[i].is_alive = 1;
-        HCVD19->entities[i].prob_early_death = MIN_PROB_OF_EARLY_NORMAL_DEATH + \
-        RAND_GEN((MAX_PROB_OF_EARLY_NORMAL_DEATH - MIN_PROB_OF_EARLY_NORMAL_DEATH));
-        HCVD19->entities[i].prob_better_immunity = MIN_PROB_OF_BETTER_IMMUNITY + \
-        RAND_GEN((MAX_PROB_OF_BETTER_IMMUNITY - MIN_PROB_OF_BETTER_IMMUNITY));
-
         if(infected_cntr < HCVD19->initialy_infected) {
-            HCVD19->entities[i].entity_cvd_report.is_infected = 1;
+            init_entity(HCVD19->entities, i, 1);
             ++infected_cntr;
         }
-        HCVD19->entities[i].entity_cvd_report.days_of_infections = 0;
-        HCVD19->entities[i].entity_cvd_report.have_symptoms = \
-        (RAND_GEN(100) < PERCENT_OF_AFFECTED_WITH_SYMPTOMS) ? 1 : 0;
-        HCVD19->entities[i].entity_cvd_report.is_hospitalized = 0;
-        HCVD19->entities[i].entity_cvd_report.is_quarantined = 0;
-        HCVD19->entities[i].entity_cvd_report.is_recovered = 0;
-        HCVD19->entities[i].entity_cvd_report.is_tested = 0;
-
-        HCVD19->entities[i].pos_data.cur_pos.x = RAND_GEN(MAX_CITY_DEFAULT_SIZE);
-        HCVD19->entities[i].pos_data.cur_pos.y = RAND_GEN(MAX_CITY_DEFAULT_SIZE);
-        HCVD19->entities[i].pos_data.speed.x = MIN_SPEED + RAND_GEN(((MAX_SPEED - MIN_SPEED) + 1));
-        HCVD19->entities[i].pos_data.speed.y = MIN_SPEED + RAND_GEN(((MAX_SPEED - MIN_SPEED) + 1));
-
+        init_entity(HCVD19->entities, i, 0);
     }
 
     for (; i < HCVD19->population_data.max_allowed_population_in_city; i++)
@@ -187,6 +172,34 @@ static void print_cvd19ssim_entity_health_record_t(cvd19ssim_core_t *HCVD19, uin
     HCVD19->entities[idx].entity_cvd_report.is_tested);
 
 }
+
+static void init_entity(entity_health_record_t *entities, uint32_t i, bool is_infected) {
+
+        entities[i].is_alive = 1;
+        entities[i].prob_early_death = MIN_PROB_OF_EARLY_NORMAL_DEATH + \
+        RAND_GEN((MAX_PROB_OF_EARLY_NORMAL_DEATH - MIN_PROB_OF_EARLY_NORMAL_DEATH));
+        entities[i].prob_better_immunity = MIN_PROB_OF_BETTER_IMMUNITY + \
+        RAND_GEN((MAX_PROB_OF_BETTER_IMMUNITY - MIN_PROB_OF_BETTER_IMMUNITY));
+
+        if(is_infected) 
+            entities[i].entity_cvd_report.is_infected = 1;
+
+        entities[i].entity_cvd_report.days_of_infections = 0;
+        entities[i].entity_cvd_report.have_symptoms = \
+        (RAND_GEN(100) < PERCENT_OF_AFFECTED_WITH_SYMPTOMS) ? 1 : 0;
+        entities[i].entity_cvd_report.is_hospitalized = 0;
+        entities[i].entity_cvd_report.is_quarantined = 0;
+        entities[i].entity_cvd_report.is_recovered = 0;
+        entities[i].entity_cvd_report.is_tested = 0;
+
+        entities[i].pos_data.cur_pos.x = RAND_GEN(MAX_CITY_DEFAULT_SIZE);
+        entities[i].pos_data.cur_pos.y = RAND_GEN(MAX_CITY_DEFAULT_SIZE);
+        entities[i].pos_data.speed.x = MIN_SPEED + RAND_GEN(((MAX_SPEED - MIN_SPEED) + 1));
+        entities[i].pos_data.speed.y = MIN_SPEED + RAND_GEN(((MAX_SPEED - MIN_SPEED) + 1));
+
+
+}
+
 
 #ifndef _WIN32
     static int sleep_in_ms(long ms) {
