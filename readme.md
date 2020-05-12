@@ -78,6 +78,8 @@
 
 ### TO DO:
 
+* when births reached max pop count and all people are healthy (ie no deaths) birth and death
+  becomes stagnant. 
 * hb people infected with cvd in hospitals (in map?)
 * when deaths make is_alive false
     * decrement cur_population
