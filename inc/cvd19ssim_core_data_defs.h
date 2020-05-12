@@ -23,7 +23,7 @@
 
 #define DEFAULT_SLEEP_TIME                  0
 
-#define STILL_FRAMES_AT_START               20
+#define STILL_FRAMES_AT_START               10
 
 #define PERCENT_OF_HIGH_SPEED               10
 

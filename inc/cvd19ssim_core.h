@@ -85,6 +85,7 @@ CVD19SSIM_STATUS_t cvd19ssim_core_t_init_entities(cvd19ssim_core_t *);
 CVD19SSIM_STATUS_t cvd19ssim_core_t_deinit(cvd19ssim_core_t *);
 CVD19SSIM_STATUS_t cvd19ssim_normal_deaths(cvd19ssim_core_t *);
 CVD19SSIM_STATUS_t cvd19ssim_normal_births(cvd19ssim_core_t *);
+CVD19SSIM_STATUS_t cvd19ssim_covid_infections(cvd19ssim_core_t *);
 int pos_move(cvd19ssim_core_t *);
 
 
