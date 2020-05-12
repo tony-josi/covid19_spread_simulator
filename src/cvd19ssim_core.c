@@ -29,7 +29,7 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
     UNUSED(print_cvd19ssim_entity_health_record_t);
     UNUSED(sleep_ms);
 
-    for(int i = 0; i < STILL_FRAMES_AT_START; i++) {
+/*     for(int i = 0; i < STILL_FRAMES_AT_START; i++) {
         sleep_ms();
         output_current_frame_ppm(&hCVD19);
     }
@@ -44,13 +44,18 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
 
         output_current_frame_ppm(&hCVD19);
 
-    }
-    
-/*     while (1) {
-        sleep_ms();
-        cvd19ssim_normal_deaths(&hCVD19);
-        printf("___________________\n");
     } */
+    
+    uint32_t temp_loop = 0;
+    while (temp_loop < 1000) {
+        sleep_ms();
+        printf("Death\n");
+        cvd19ssim_normal_deaths(&hCVD19);
+        printf("Birth\n");
+        cvd19ssim_normal_births(&hCVD19);
+        printf("___________________\n");
+        temp_loop++;
+    }
     
     if(cvd19ssim_core_t_deinit(&hCVD19) != CVD19SSIM_SUCCESS)
         return CVD19SSIM_INIT_FAIL;
@@ -105,14 +110,28 @@ CVD19SSIM_STATUS_t cvd19ssim_normal_deaths(cvd19ssim_core_t *HCVD19) {
         ((HCVD19->entities[i].prob_better_immunity - HCVD19->entities[i].prob_early_death) < (NORMAL_DEATH_THRESHOLD))) {
             HCVD19->entities[i].is_alive = 0;
             deaths_today++;
+            printf("CAN: %d     %d      %d\n", i, (HCVD19->entities[i].prob_better_immunity - HCVD19->entities[i].prob_early_death), MAG((NORMAL_DEATH_THRESHOLD)));
         }
     }
     return CVD19SSIM_SUCCESS;
 }
 
-/* CVD19SSIM_STATUS_t cvd19ssim_normal_births(cvd19ssim_core_t *HCVID19) {
-
-} */
+CVD19SSIM_STATUS_t cvd19ssim_normal_births(cvd19ssim_core_t *HCVID19) {
+    uint32_t births_today = 0;
+    if(HCVID19->population_data.cur_population < HCVID19->population_data.max_allowed_population_in_city) {
+        if((RAND_GEN(PERCENT)) > (PERCENT - PERCENT_CHANCE_BIRTHS_OCCUR)) {
+            for(uint32_t i = 0; ((i < HCVID19->population_data.max_allowed_population_in_city) & (births_today < HCVID19->avg_birth_rate)); ++i) {
+                if(!HCVID19->entities[i].is_alive) {
+                    init_entity(HCVID19->entities, i, 0);
+                    HCVID19->population_data.cur_population += 1;
+                    ++births_today;
+                    printf("Birth i: %d\n", i);
+                }
+            }
+        }
+    }
+    return CVD19SSIM_SUCCESS;
+}
 
 
 static void print_cvd19ssim_core_t(cvd19ssim_core_t *HCVD19) {
