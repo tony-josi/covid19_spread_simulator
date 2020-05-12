@@ -131,8 +131,6 @@ CVD19SSIM_STATUS_t cvd19ssim_normal_births(cvd19ssim_core_t *HCVID19) {
 }
 
 
-
-
 CVD19SSIM_STATUS_t cvd19ssim_core_t_init_entities(cvd19ssim_core_t *HCVD19) {
 
     uint32_t infected_cntr = 0, i = 0;
@@ -149,5 +147,23 @@ CVD19SSIM_STATUS_t cvd19ssim_core_t_init_entities(cvd19ssim_core_t *HCVD19) {
 
     return CVD19SSIM_SUCCESS;
 
+}
+
+
+CVD19SSIM_STATUS_t cvd19ssim_covid_infections(cvd19ssim_core_t *HCVD19) {
+    UNUSED(HCVD19);
+    // loop through all infected & not hospitalised (quarantined)
+        // increment days of infection
+        // calc people who will get infected
+            // distance
+            // immunity
+            // recovered?
+        // insert newly infected ID in local array
+    
+    // after looping init IDs in array into struct
+        // add data abt symtoms
+        // days of infections 
+
+    return CVD19SSIM_SUCCESS;
 }
 
