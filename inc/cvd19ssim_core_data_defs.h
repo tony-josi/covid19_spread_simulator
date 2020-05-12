@@ -23,10 +23,18 @@
 
 #define DEFAULT_SLEEP_TIME                  10
 
+#define STILL_FRAMES_AT_START               20
+
 #define PERCENT_OF_HIGH_SPEED               20
 
 #define HIGH_SPEED_POSSIBLE                 10
 
 #define PERCENT                             100
+
+#define INVERSE_DEATH_CONSTANT              20
+
+#define NORMAL_DEATH_THRESHOLD              ((MIN_PROB_OF_BETTER_IMMUNITY + ((MAX_PROB_OF_BETTER_IMMUNITY - MIN_PROB_OF_BETTER_IMMUNITY) / 2)) - \
+                                            (MIN_PROB_OF_EARLY_NORMAL_DEATH + ((MAX_PROB_OF_EARLY_NORMAL_DEATH - MIN_PROB_OF_EARLY_NORMAL_DEATH) / 2)) - \
+                                            INVERSE_DEATH_CONSTANT)
 
 #endif /* _CVD19SSIM_CORE_DATA_DEFS_H */

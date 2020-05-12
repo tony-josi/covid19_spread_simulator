@@ -26,29 +26,31 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
 
     UNUSED(print_cvd19ssim_core_t);
     UNUSED(print_cvd19ssim_entity_health_record_t);
-    /*
-    UNUSED(print_cvd19ssim_core_t(&hCVD19));
-    printf("__________________INIT   D O N E_______________________\n");
-    for(uint32_t i = 0; i < hCVD19.population_data.cur_population; i++) {
-        printf("Entty: %d\n", i);
-        print_cvd19ssim_entity_health_record_t(&hCVD19, i);
-        printf("__________________INIT   D O N E_______________________\n");
-    }
-    */
+    UNUSED(sleep_ms);
 
-    output_current_frame_ppm(&hCVD19);
+    for(int i = 0; i < STILL_FRAMES_AT_START; i++) {
+        sleep_ms();
+        output_current_frame_ppm(&hCVD19);
+    }
+    
     while (1) {
 
         sleep_ms();
+        cvd19ssim_normal_deaths(&hCVD19);
+        
         if(pos_move(&hCVD19))
             return CVD19SSIM_FAIL;
 
         output_current_frame_ppm(&hCVD19);
 
-   }
-   
+    }
     
-
+/*     while (1) {
+        sleep_ms();
+        cvd19ssim_normal_deaths(&hCVD19);
+        printf("___________________\n");
+    } */
+    
     if(cvd19ssim_core_t_deinit(&hCVD19) != CVD19SSIM_SUCCESS)
         return CVD19SSIM_INIT_FAIL;
 
@@ -93,6 +95,22 @@ CVD19SSIM_STATUS_t cvd19ssim_core_t_deinit(cvd19ssim_core_t *HCVD19) {
 
 }
 
+CVD19SSIM_STATUS_t cvd19ssim_normal_deaths(cvd19ssim_core_t *HCVD19) {
+    uint32_t deaths_today = 0;
+    //printf("DTH: %d\n", (NORMAL_DEATH_THRESHOLD));
+    for(uint32_t i = 0; ((i < HCVD19->population_data.max_allowed_population_in_city) & \
+    (deaths_today < HCVD19->avg_death_rate)); i++) {
+        if(HCVD19->entities[i].is_alive & \
+        ((HCVD19->entities[i].prob_better_immunity - HCVD19->entities[i].prob_early_death) < (NORMAL_DEATH_THRESHOLD))) {
+            HCVD19->entities[i].is_alive = 0;
+            deaths_today++;
+            //printf("CAN: %d     %d      %d\n", i, (HCVD19->entities[i].prob_better_immunity - HCVD19->entities[i].prob_early_death), MAG((NORMAL_DEATH_THRESHOLD)));
+        }
+    }
+    return CVD19SSIM_SUCCESS;
+}
+
+
 static void print_cvd19ssim_core_t(cvd19ssim_core_t *HCVD19) {
 
     printf("%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n",
@@ -115,8 +133,8 @@ static void print_cvd19ssim_core_t(cvd19ssim_core_t *HCVD19) {
 
 CVD19SSIM_STATUS_t cvd19ssim_core_t_init_entities(cvd19ssim_core_t *HCVD19) {
 
-    uint32_t infected_cntr = 0;
-    for (uint32_t i = 0; i < HCVD19->population_data.cur_population; i++) {
+    uint32_t infected_cntr = 0, i = 0;
+    for (i = 0; i < HCVD19->population_data.cur_population; i++) {
 
         HCVD19->entities[i].is_alive = 1;
         HCVD19->entities[i].prob_early_death = MIN_PROB_OF_EARLY_NORMAL_DEATH + \
@@ -142,6 +160,9 @@ CVD19SSIM_STATUS_t cvd19ssim_core_t_init_entities(cvd19ssim_core_t *HCVD19) {
         HCVD19->entities[i].pos_data.speed.y = MIN_SPEED + RAND_GEN(((MAX_SPEED - MIN_SPEED) + 1));
 
     }
+
+    for (; i < HCVD19->population_data.max_allowed_population_in_city; i++)
+        HCVD19->entities[i].is_alive = 0;
 
     return CVD19SSIM_SUCCESS;
 
