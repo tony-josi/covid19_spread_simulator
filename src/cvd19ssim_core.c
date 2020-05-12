@@ -113,7 +113,7 @@ CVD19SSIM_STATUS_t cvd19ssim_normal_deaths(cvd19ssim_core_t *HCVD19) {
                     HCVD19->entities[i].is_alive = 0;
                     deaths_today++;
                     HCVD19->population_data.cur_population -= 1;
-                    printf("CAN: %d     %d      %d\n", i, (HCVD19->entities[i].prob_better_immunity - HCVD19->entities[i].prob_early_death), MAG((NORMAL_DEATH_THRESHOLD)));
+                    //printf("CAN: %d     %d      %d\n", i, (HCVD19->entities[i].prob_better_immunity - HCVD19->entities[i].prob_early_death), MAG((NORMAL_DEATH_THRESHOLD)));
                 }
             }           
         }
@@ -130,7 +130,7 @@ CVD19SSIM_STATUS_t cvd19ssim_normal_births(cvd19ssim_core_t *HCVID19) {
                     init_entity(HCVID19->entities, i, 0);
                     HCVID19->population_data.cur_population += 1;
                     ++births_today;
-                    printf("Birth i: %d\n", i);
+                    //printf("Birth i: %d\n", i);
                 }
             }
         }
