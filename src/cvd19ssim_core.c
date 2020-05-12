@@ -205,7 +205,6 @@ static void print_cvd19ssim_entity_health_record_t(cvd19ssim_core_t *HCVD19, uin
     }
 #endif
 
-
 static void sleep_ms() {
 
     /* if Windows system */
