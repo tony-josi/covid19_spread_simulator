@@ -92,3 +92,28 @@
 `make`
 
 `./cvd19ssim | mpv --no-correct-pts --fps=5 -`
+
+### Rough Works:
+
+
+#### cvd19ssim_covid_infections()
+
+    // loop through all infected & not hospitalised (quarantined)
+
+        // increment days of infection
+
+        // calc people who will get infected
+        
+            // distance
+        
+            // immunity
+        
+            // recovered?
+        
+        // insert newly infected ID in local array
+    
+    // after looping init IDs in array into struct
+    
+        // add data abt symtoms
+    
+        // days of infections 

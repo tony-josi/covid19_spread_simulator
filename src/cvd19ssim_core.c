@@ -157,18 +157,6 @@ CVD19SSIM_STATUS_t cvd19ssim_core_t_init_entities(cvd19ssim_core_t *HCVD19) {
 
 
 CVD19SSIM_STATUS_t cvd19ssim_covid_infections(cvd19ssim_core_t *HCVD19) {
-    UNUSED(HCVD19);
-    // loop through all infected & not hospitalised (quarantined)
-        // increment days of infection
-        // calc people who will get infected
-            // distance
-            // immunity
-            // recovered?
-        // insert newly infected ID in local array
-    
-    // after looping init IDs in array into struct
-        // add data abt symtoms
-        // days of infections 
 
     uint32_t temp_inf_ent_buff[MAX_ALLOWED_POPULATION], buff_cntr = 0;
 
@@ -183,7 +171,7 @@ CVD19SSIM_STATUS_t cvd19ssim_covid_infections(cvd19ssim_core_t *HCVD19) {
                 if(HCVD19->entities[j].is_alive & (i != j)) {
                     
                     if(check_if_in_spread_range(*HCVD19, i, j)){
-                        if(RAND_GEN(PERCENT) < PERCENT_CHANCE_OF_CVD_INF_IN_SPRD_DIST) {
+                        if((RAND_GEN(PERCENT) < PERCENT_CHANCE_OF_CVD_INF_IN_SPRD_DIST) & !(HCVD19->entities[j].entity_cvd_report.is_recovered)) {
                             temp_inf_ent_buff[buff_cntr++] = j;
                         }
                     }
