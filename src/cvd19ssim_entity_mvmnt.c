@@ -50,7 +50,7 @@ bool check_if_in_spread_range(cvd19ssim_core_t hCVD19, uint32_t i, uint32_t j) {
 
     if(dist <= \
     ((double)hCVD19.max_spread_distance)) {
-        printf("Dist from inf %d to %d: %f\n", i, j, dist);
+        //printf("Dist from inf %d to %d: %f\n", i, j, dist);
         return 1;
     }
     else
