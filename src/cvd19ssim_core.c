@@ -193,11 +193,7 @@ CVD19SSIM_STATUS_t cvd19ssim_covid_infections(cvd19ssim_core_t *HCVD19) {
     }
 
     for(uint32_t j = 0; j < buff_cntr; ++j) {
-        HCVD19->entities[temp_inf_ent_buff[j]].entity_cvd_report.is_infected = 1;
-        HCVD19->entities[temp_inf_ent_buff[j]].entity_cvd_report.days_of_infections = 0;
-        HCVD19->entities[temp_inf_ent_buff[j]].entity_cvd_report.is_hospitalized = 0;
-        HCVD19->entities[temp_inf_ent_buff[j]].entity_cvd_report.is_quarantined = 0;
-        HCVD19->entities[temp_inf_ent_buff[j]].entity_cvd_report.have_symptoms = (((RAND_GEN(PERCENT)) < PERCENT_OF_AFFECTED_WITH_SYMPTOMS) ? 1 : 0);
+        init_entity_inf_cvd_report(HCVD19->entities, temp_inf_ent_buff[j]);
     }
 
     return CVD19SSIM_SUCCESS;

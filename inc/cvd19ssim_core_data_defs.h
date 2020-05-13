@@ -5,9 +5,9 @@
 
 #define INIT_POPL_LOWER_LIMIT_DIFF              100
 
-#define MAX_SPREAD_DISTANCE                     5
+#define MAX_SPREAD_DISTANCE                     3
 
-#define PERCENT_CHANCE_OF_CVD_INF_IN_SPRD_DIST  80
+#define PERCENT_CHANCE_OF_CVD_INF_IN_SPRD_DIST  60
 
 #define MAX_SPEED                               2
 
@@ -25,7 +25,7 @@
 
 #define PERCENT_OF_AFFECTED_WITH_SYMPTOMS       60
 
-#define DEFAULT_SLEEP_TIME                      0
+#define DEFAULT_SLEEP_TIME                      10
 
 #define STILL_FRAMES_AT_START                   10
 

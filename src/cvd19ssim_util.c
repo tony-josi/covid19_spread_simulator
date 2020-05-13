@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
+#include "../inc/cvd19ssim_util.h"
 #include "../inc/cvd19ssim_core.h"
 #include "../inc/cvd19ssim_core_data_defs.h"
 #include "../inc/cvd19ssim_ppm.h"
@@ -57,13 +58,8 @@ void init_entity(entity_health_record_t *entities, uint32_t i, bool is_infected)
         entities[i].prob_better_immunity = MIN_PROB_OF_BETTER_IMMUNITY + \
         RAND_GEN((MAX_PROB_OF_BETTER_IMMUNITY - MIN_PROB_OF_BETTER_IMMUNITY));
 
-        if(is_infected) {
-            entities[i].entity_cvd_report.is_infected = 1;
-            entities[i].entity_cvd_report.days_of_infections = 0;
-            entities[i].entity_cvd_report.is_hospitalized = 0;
-            entities[i].entity_cvd_report.is_quarantined = 0;
-            entities[i].entity_cvd_report.have_symptoms = (((RAND_GEN(PERCENT)) < PERCENT_OF_AFFECTED_WITH_SYMPTOMS) ? 1 : 0);
-        }
+        if(is_infected)
+            init_entity_inf_cvd_report(entities, i);
 
         entities[i].entity_cvd_report.days_of_infections = 0;
         entities[i].entity_cvd_report.have_symptoms = \
@@ -79,6 +75,16 @@ void init_entity(entity_health_record_t *entities, uint32_t i, bool is_infected)
         entities[i].pos_data.speed.y = MIN_SPEED + RAND_GEN(((MAX_SPEED - MIN_SPEED) + 1));
 
 
+}
+
+void init_entity_inf_cvd_report(entity_health_record_t *entities, uint32_t j) {
+
+    entities[j].entity_cvd_report.is_infected = 1;
+    entities[j].entity_cvd_report.days_of_infections = 0;
+    entities[j].entity_cvd_report.is_hospitalized = 0;
+    entities[j].entity_cvd_report.is_quarantined = 0;
+    entities[j].entity_cvd_report.have_symptoms = \
+    (((RAND_GEN(PERCENT)) < PERCENT_OF_AFFECTED_WITH_SYMPTOMS) ? 1 : 0);
 }
 
 
