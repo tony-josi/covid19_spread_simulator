@@ -77,7 +77,8 @@
 * acceleration in both x, y should be 1 unit for better visual rep (only sign changes)
 
 ### TO DO:
-* INCREMENT INF DAYS
+* INCREMENT INF DAYS (each day), increment new births, new deaths
+* log report of each day to a file
 * when births reached max pop count and all people are healthy (ie no deaths) birth and death
   becomes stagnant. 
 * hb people infected with cvd in hospitals (in map?)
