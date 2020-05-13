@@ -5,6 +5,7 @@
 #include "../inc/cvd19ssim_core_data_defs.h"
 #include "../inc/cvd19ssim_ppm.h"
 #include "../inc/cvd19ssim_util.h"
+#include "../inc/cvd19ssim_entity_mvmnt.h"
 
 CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
     

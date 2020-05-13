@@ -3,7 +3,6 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include "cvd19ssim_entity_mvmnt.h"
 
 #ifndef EXIT_SUCCESS
 #define EXIT_SUCCESS                    0
@@ -22,6 +21,23 @@ typedef enum {
     CVD19SSIM_MISC_FAIL
 
 } CVD19SSIM_STATUS_t;
+
+typedef struct _position {
+    uint32_t x;
+    uint32_t y;
+} position_t;
+
+typedef struct _speed {
+    int x;
+    int y;
+} speed_t;
+
+typedef struct _cvd19ssim_entity_mvmnt {
+
+    position_t      cur_pos;
+    speed_t         speed;
+
+} cvd19ssim_entity_mvmnt_t;
 
 typedef struct _cur_population_stat {
 
@@ -86,8 +102,6 @@ CVD19SSIM_STATUS_t cvd19ssim_core_t_deinit(cvd19ssim_core_t *);
 CVD19SSIM_STATUS_t cvd19ssim_normal_deaths(cvd19ssim_core_t *);
 CVD19SSIM_STATUS_t cvd19ssim_normal_births(cvd19ssim_core_t *);
 CVD19SSIM_STATUS_t cvd19ssim_covid_infections(cvd19ssim_core_t *);
-int pos_move(cvd19ssim_core_t *);
-
 
 #endif /* _CVD19SSIM_CORE_H */
 
