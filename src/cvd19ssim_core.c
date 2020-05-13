@@ -168,22 +168,36 @@ CVD19SSIM_STATUS_t cvd19ssim_covid_infections(cvd19ssim_core_t *HCVD19) {
         // add data abt symtoms
         // days of infections 
 
-    for(uint32_t i = 0; i < HCVD19->population_data.max_allowed_population_in_city; ++i) {
+    uint32_t temp_inf_ent_buff[MAX_ALLOWED_POPULATION], buff_cntr = 0;
 
-        uint32_t temp_inf_ent_buff[MAX_ALLOWED_POPULATION], buff_cntr = 0;
+    for(uint32_t i = 0; i < HCVD19->population_data.max_allowed_population_in_city; ++i) {
         
         if(HCVD19->entities[i].is_alive & HCVD19->entities[i].entity_cvd_report.is_infected & \
         !(HCVD19->entities[i].entity_cvd_report.is_quarantined | HCVD19->entities[i].entity_cvd_report.is_hospitalized)) {
+            
             HCVD19->entities[i].entity_cvd_report.days_of_infections += 1;
+            
             for(uint32_t j = 0; j < HCVD19->population_data.max_allowed_population_in_city; ++j) {
                 if(HCVD19->entities[j].is_alive & (i != j)) {
+                    
                     if(check_if_in_spread_range(*HCVD19, i, j)){
-
+                        if(RAND_GEN(PERCENT) < PERCENT_CHANCE_OF_CVD_INF_IN_SPRD_DIST) {
+                            temp_inf_ent_buff[buff_cntr++] = j;
+                        }
                     }
                 }
             }
         } 
     }
+
+    for(uint32_t j = 0; j < buff_cntr; ++j) {
+        HCVD19->entities[temp_inf_ent_buff[j]].entity_cvd_report.is_infected = 1;
+        HCVD19->entities[temp_inf_ent_buff[j]].entity_cvd_report.days_of_infections = 0;
+        HCVD19->entities[temp_inf_ent_buff[j]].entity_cvd_report.is_hospitalized = 0;
+        HCVD19->entities[temp_inf_ent_buff[j]].entity_cvd_report.is_quarantined = 0;
+        HCVD19->entities[temp_inf_ent_buff[j]].entity_cvd_report.have_symptoms = (((RAND_GEN(PERCENT)) < PERCENT_OF_AFFECTED_WITH_SYMPTOMS) ? 1 : 0);
+    }
+
     return CVD19SSIM_SUCCESS;
 }
 

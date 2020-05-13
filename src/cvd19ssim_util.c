@@ -57,8 +57,13 @@ void init_entity(entity_health_record_t *entities, uint32_t i, bool is_infected)
         entities[i].prob_better_immunity = MIN_PROB_OF_BETTER_IMMUNITY + \
         RAND_GEN((MAX_PROB_OF_BETTER_IMMUNITY - MIN_PROB_OF_BETTER_IMMUNITY));
 
-        if(is_infected) 
+        if(is_infected) {
             entities[i].entity_cvd_report.is_infected = 1;
+            entities[i].entity_cvd_report.days_of_infections = 0;
+            entities[i].entity_cvd_report.is_hospitalized = 0;
+            entities[i].entity_cvd_report.is_quarantined = 0;
+            entities[i].entity_cvd_report.have_symptoms = (((RAND_GEN(PERCENT)) < PERCENT_OF_AFFECTED_WITH_SYMPTOMS) ? 1 : 0);
+        }
 
         entities[i].entity_cvd_report.days_of_infections = 0;
         entities[i].entity_cvd_report.have_symptoms = \
