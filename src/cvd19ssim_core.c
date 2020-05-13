@@ -22,7 +22,7 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
     UNUSED(print_cvd19ssim_entity_health_record_t);
     UNUSED(sleep_ms);
 
-    for(int i = 0; i < STILL_FRAMES_AT_START; i++) {
+/*     for(int i = 0; i < STILL_FRAMES_AT_START; i++) {
         sleep_ms();
         output_current_frame_ppm(&hCVD19);
     }
@@ -38,18 +38,21 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
 
         output_current_frame_ppm(&hCVD19);
 
-    }
+    } */
     
-/*     uint32_t temp_loop = 0;
+    uint32_t temp_loop = 0;
     while (temp_loop < 1000) {
         sleep_ms();
         printf("Death\n");
         cvd19ssim_normal_deaths(&hCVD19);
         printf("Birth\n");
         cvd19ssim_normal_births(&hCVD19);
+        printf("Inf\n");
+        pos_move(&hCVD19);
+        cvd19ssim_covid_infections(&hCVD19);
         printf("___________________\n");
         temp_loop++;
-    } */
+    }
     
     if(cvd19ssim_core_t_deinit(&hCVD19) != CVD19SSIM_SUCCESS)
         return CVD19SSIM_INIT_FAIL;
@@ -78,7 +81,7 @@ CVD19SSIM_STATUS_t cvd19ssim_core_t_init(cvd19ssim_core_t *HCVD19) {
     HCVD19->population_data.total_infected = HCVD19->initialy_infected;
     HCVD19->population_data.total_infected_n_died = 0;
     HCVD19->population_data.total_recovered = 0;
-    HCVD19->max_spread_distance = 3;
+    HCVD19->max_spread_distance = MAX_SPREAD_DISTANCE;
     
     if(!(HCVD19->entities = 
     malloc(sizeof(entity_health_record_t) * HCVD19->population_data.max_allowed_population_in_city)))
@@ -104,9 +107,9 @@ CVD19SSIM_STATUS_t cvd19ssim_normal_deaths(cvd19ssim_core_t *HCVD19) {
                 if(HCVD19->entities[i].is_alive & \
                 ((HCVD19->entities[i].prob_better_immunity - HCVD19->entities[i].prob_early_death) < (NORMAL_DEATH_THRESHOLD))) {
                     HCVD19->entities[i].is_alive = 0;
-                    deaths_today++;
+                    ++deaths_today;
                     HCVD19->population_data.cur_population -= 1;
-                    //printf("CAN: %d     %d      %d\n", i, (HCVD19->entities[i].prob_better_immunity - HCVD19->entities[i].prob_early_death), MAG((NORMAL_DEATH_THRESHOLD)));
+                    printf("CAN: %d     %d      %d\n", i, (HCVD19->entities[i].prob_better_immunity - HCVD19->entities[i].prob_early_death), MAG((NORMAL_DEATH_THRESHOLD)));
                 }
             }           
         }
@@ -123,7 +126,7 @@ CVD19SSIM_STATUS_t cvd19ssim_normal_births(cvd19ssim_core_t *HCVID19) {
                     init_entity(HCVID19->entities, i, 0);
                     HCVID19->population_data.cur_population += 1;
                     ++births_today;
-                    //printf("Birth i: %d\n", i);
+                    printf("Birth i: %d\n", i);
                 }
             }
         }
@@ -165,6 +168,22 @@ CVD19SSIM_STATUS_t cvd19ssim_covid_infections(cvd19ssim_core_t *HCVD19) {
         // add data abt symtoms
         // days of infections 
 
+    for(uint32_t i = 0; i < HCVD19->population_data.max_allowed_population_in_city; ++i) {
+
+        uint32_t temp_inf_ent_buff[MAX_ALLOWED_POPULATION], buff_cntr = 0;
+        
+        if(HCVD19->entities[i].is_alive & HCVD19->entities[i].entity_cvd_report.is_infected & \
+        !(HCVD19->entities[i].entity_cvd_report.is_quarantined | HCVD19->entities[i].entity_cvd_report.is_hospitalized)) {
+            HCVD19->entities[i].entity_cvd_report.days_of_infections += 1;
+            for(uint32_t j = 0; j < HCVD19->population_data.max_allowed_population_in_city; ++j) {
+                if(HCVD19->entities[j].is_alive & (i != j)) {
+                    if(check_if_in_spread_range(*HCVD19, i, j)){
+
+                    }
+                }
+            }
+        } 
+    }
     return CVD19SSIM_SUCCESS;
 }
 

@@ -7,6 +7,6 @@
 
 int pos_move(cvd19ssim_core_t *);
 double pos_calc_distance(position_t, position_t);
-bool check_if_in_spread_range(cvd19ssim_core_t hC, uint32_t i, uint32_t j);
+bool check_if_in_spread_range(cvd19ssim_core_t, uint32_t, uint32_t);
 
 #endif /* _CVD19SSIM_ENTITY_MVMNT_H */

@@ -5,6 +5,8 @@
 
 #define INIT_POPL_LOWER_LIMIT_DIFF          100
 
+#define MAX_SPREAD_DISTANCE                 10
+
 #define MAX_SPEED                           2
 
 #define MIN_SPEED                           1

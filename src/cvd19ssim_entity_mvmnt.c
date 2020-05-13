@@ -1,4 +1,5 @@
 #include <math.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include "../inc/cvd19ssim_core.h"
 #include "../inc/cvd19ssim_ppm.h"
@@ -44,9 +45,14 @@ double pos_calc_distance(position_t pt1, position_t pt2) {
 
 bool check_if_in_spread_range(cvd19ssim_core_t hCVD19, uint32_t i, uint32_t j) {
     
-    if(pos_calc_distance(hCVD19.entities[i].pos_data.cur_pos, hCVD19.entities[j].pos_data.cur_pos) <= \
-    ((double)hCVD19.max_spread_distance))
+    double dist = pos_calc_distance(hCVD19.entities[i].pos_data.cur_pos, hCVD19.entities[j].pos_data.cur_pos);
+            //printf("Dist from inf %d to %d: %f\n", i, j, dist);
+
+    if(dist <= \
+    ((double)hCVD19.max_spread_distance)) {
+        printf("Dist from inf %d to %d: %f\n", i, j, dist);
         return 1;
+    }
     else
         return 0;
 
