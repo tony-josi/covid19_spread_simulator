@@ -11,7 +11,9 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
     
     srand(time(0)); 
     cvd19ssim_core_t hCVD19;
+    uint64_t loop_cntr = 0;
     FILE *log_fptr;
+    bool is_log_closed = 0;
 
     if(cvd19ssim_core_t_init(&hCVD19) != CVD19SSIM_SUCCESS)
         return CVD19SSIM_INIT_FAIL;
@@ -43,6 +45,14 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
         cvd19ssim_covid_infections(&hCVD19);
         cvd19ssim_daily_summary_calc(&hCVD19);
 
+        if(loop_cntr++ < MAX_NUM_OF_LOOPS_TO_LOG)
+            cvd19ssim_log_per_day_report(&hCVD19, log_fptr);
+        else
+            if(!is_log_closed) {
+                de_init_log_file(log_fptr);
+                is_log_closed = 1;
+            }
+        
         output_current_frame_ppm(&hCVD19);
 
     }
@@ -57,15 +67,16 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
         //printf("Inf\n");
         pos_move(&hCVD19);
         cvd19ssim_covid_infections(&hCVD19);
-        //printf("___________________\n");
+        cvd19ssim_daily_summary_calc(&hCVD19);
+        cvd19ssim_log_per_day_report(&hCVD19, log_fptr);
+        printf("___________________\n");
         temp_loop++;
     } */
     
     if(cvd19ssim_core_t_deinit(&hCVD19) != CVD19SSIM_SUCCESS)
         return CVD19SSIM_INIT_FAIL;
 
-    de_init_log_file(log_fptr);
-
+    //de_init_log_file(log_fptr);
     return CVD19SSIM_SUCCESS;
 
 }
@@ -189,6 +200,7 @@ CVD19SSIM_STATUS_t cvd19ssim_covid_infections(cvd19ssim_core_t *HCVD19) {
     }
 
     for(uint32_t j = 0; j < buff_cntr; ++j) {
+        HCVD19->population_data.total_infected += 1;
         init_entity_inf_cvd_report(HCVD19->entities, temp_inf_ent_buff[j]);
     }
 
@@ -211,4 +223,19 @@ CVD19SSIM_STATUS_t cvd19ssim_daily_summary_calc(cvd19ssim_core_t *HCVD19) {
 
 } 
 
+CVD19SSIM_STATUS_t cvd19ssim_log_per_day_report(cvd19ssim_core_t *HCVD19, FILE *fptr) {
 
+    char str_buff[200];
+
+    sprintf(str_buff, "DAY: %d, CUR_POPL: %d, TOTAL_CVD_INF: %d, TOTAL_CVD_ACTIVE: %d, TOTAL_CVD_RECVRD: %d, TOTAL_DCSD: %d\n\r", \
+    HCVD19->days_passed, HCVD19->population_data.cur_population, \
+    HCVD19->population_data.total_infected, \
+    (HCVD19->population_data.total_infected - HCVD19->population_data.total_recovered), \
+    HCVD19->population_data.total_recovered, \
+    HCVD19->population_data.total_infected_n_died);
+
+    //printf("%s", str_buff);
+    fputs(str_buff, fptr);
+
+    return CVD19SSIM_SUCCESS;
+}

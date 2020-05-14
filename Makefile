@@ -2,7 +2,8 @@
 TARGET = cvd19ssim
 STD_LIBS = -lm
 CC = gcc
-CFLAGS = -std=c99 -pedantic -Wall -Wextra -Wformat -Ofast -ggdb3
+#CFLAGS = -std=c99 -pedantic -Wall -Wextra -Wformat -Ofast -ggdb3
+CFLAGS = -std=c99 -pedantic -Wall -Wextra -Wformat -ggdb3 -mmacosx-version-min=10.0
 LFLAGS = -pedantic -Wall -Wextra 
 CFLAGS_STRICT = -std=c99 -Wall -pedantic -ggdb3 \
 -pedantic-errors -Wextra -Waggregate-return -Wcast-align \

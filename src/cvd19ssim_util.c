@@ -86,6 +86,7 @@ void init_entity_inf_cvd_report(entity_health_record_t *entities, uint32_t j) {
     entities[j].entity_cvd_report.is_quarantined = 0;
     entities[j].entity_cvd_report.have_symptoms = \
     (((RAND_GEN(PERCENT)) < PERCENT_OF_AFFECTED_WITH_SYMPTOMS) ? 1 : 0);
+    
 }
 
 FILE* init_log_file(char *f_name) {
