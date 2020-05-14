@@ -19,11 +19,11 @@ int pos_move(cvd19ssim_core_t *HCVD19) {
         }
 
         if(RAND_GEN(PERCENT) > (PERCENT - PERCENT_OF_HIGH_SPEED))
-            HCVD19->entities[i].pos_data.speed.x = RAND_GEN(HIGH_SPEED_POSSIBLE);
+            HCVD19->entities[i].pos_data.speed.x = MIN_SPEED + RAND_GEN(HIGH_SPEED_POSSIBLE);
         else
             HCVD19->entities[i].pos_data.speed.x = MIN_SPEED + RAND_GEN(((MAX_SPEED - MIN_SPEED) + 1));
         if(RAND_GEN(PERCENT) > (PERCENT - PERCENT_OF_HIGH_SPEED))
-            HCVD19->entities[i].pos_data.speed.y = RAND_GEN(HIGH_SPEED_POSSIBLE);
+            HCVD19->entities[i].pos_data.speed.y = MIN_SPEED + RAND_GEN(HIGH_SPEED_POSSIBLE);
         else
             HCVD19->entities[i].pos_data.speed.y = MIN_SPEED + RAND_GEN(((MAX_SPEED - MIN_SPEED) + 1));
 

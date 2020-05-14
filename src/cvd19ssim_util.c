@@ -69,8 +69,8 @@ void init_entity(entity_health_record_t *entities, uint32_t i, bool is_infected)
         entities[i].entity_cvd_report.is_recovered = 0;
         entities[i].entity_cvd_report.is_tested = 0;
 
-        entities[i].pos_data.cur_pos.x = SQUARE_FRAME_SIZE + RAND_GEN((MAX_CITY_DEFAULT_SIZE - SQUARE_FRAME_SIZE));
-        entities[i].pos_data.cur_pos.y = SQUARE_FRAME_SIZE + RAND_GEN((MAX_CITY_DEFAULT_SIZE - SQUARE_FRAME_SIZE));
+        entities[i].pos_data.cur_pos.x = SQUARE_FRAME_SIZE + RAND_GEN((MAX_CITY_DEFAULT_SIZE - SQUARE_FRAME_SIZE - 5));
+        entities[i].pos_data.cur_pos.y = SQUARE_FRAME_SIZE + RAND_GEN((MAX_CITY_DEFAULT_SIZE - SQUARE_FRAME_SIZE - 5));
         entities[i].pos_data.speed.x = MIN_SPEED + RAND_GEN(((MAX_SPEED - MIN_SPEED) + 1));
         entities[i].pos_data.speed.y = MIN_SPEED + RAND_GEN(((MAX_SPEED - MIN_SPEED) + 1));
 

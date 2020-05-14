@@ -40,7 +40,8 @@ void output_current_frame_ppm(cvd19ssim_core_t *HCVD19) {
 
 void buf_clear(void)
 {
-    memset(ppm_buf, 0x050a0f, sizeof(ppm_buf));
+    //0x080818
+    memset(ppm_buf, 0x0C0818, sizeof(ppm_buf));
 }
 
 void buf_set(int x, int y, long color)

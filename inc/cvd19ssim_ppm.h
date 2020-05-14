@@ -3,9 +3,9 @@
 
 #include "cvd19ssim_core.h"
 
-#define MAX_CITY_DEFAULT_SIZE           270
+#define MAX_CITY_DEFAULT_SIZE           512
 
-#define SQUARE_FRAME_SIZE               15
+#define SQUARE_FRAME_SIZE               14
 
 #define PIXEL_SIZE                      4
 
