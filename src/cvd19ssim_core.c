@@ -84,6 +84,7 @@ CVD19SSIM_STATUS_t cvd19ssim_core_t_init(cvd19ssim_core_t *HCVD19) {
     HCVD19->population_data.total_infected_n_died = 0;
     HCVD19->population_data.total_recovered = 0;
     HCVD19->max_spread_distance = MAX_SPREAD_DISTANCE;
+    HCVD19->days_passed = 0;
     
     if(!(HCVD19->entities = 
     malloc(sizeof(entity_health_record_t) * HCVD19->population_data.max_allowed_population_in_city)))

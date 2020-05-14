@@ -70,6 +70,11 @@
                     * decrease from cur_filled_hosp_capacity
             * update total_recovered
 
+    * `cvd19ssim_daily_summary_calc`
+        * inc days_passed
+        * inf days for infected people
+        * (new feature) add age for each entity (incorporate that in all algos)
+
 
 
 ### misc. data:
