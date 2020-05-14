@@ -5,6 +5,8 @@
 
 #define INIT_POPL_LOWER_LIMIT_DIFF              100
 
+#define LOG_FILE_PATH                           "./log/cvd19.log"
+
 #define MAX_SPREAD_DISTANCE                     3
 
 #define PERCENT_CHANCE_OF_CVD_INF_IN_SPRD_DIST  60
