@@ -9,7 +9,7 @@
 
 #define PPM_SIZE                        (MAX_CITY_DEFAULT_SIZE * PIXEL_SIZE)
 
-#define CHECK_RANGE(N)                  (bool)(((N >= (PIXEL_SIZE)) & (N < (MAX_CITY_DEFAULT_SIZE - PIXEL_SIZE))) ? 1 : 0)
+#define CHECK_RANGE(N)                  (bool)(((N >= (PIXEL_SIZE)) && (N < (MAX_CITY_DEFAULT_SIZE - PIXEL_SIZE))) ? 1 : 0)
 
 void output_current_frame_ppm(cvd19ssim_core_t *);
 

@@ -107,7 +107,7 @@ CVD19SSIM_STATUS_t cvd19ssim_normal_deaths(cvd19ssim_core_t *HCVD19) {
     if(HCVD19->population_data.cur_population > 0) {
         if((RAND_GEN(PERCENT)) > (PERCENT - PERCENT_CHANCE_DEATHS_OCCUR)) {
             for(uint32_t i = 0; ((i < HCVD19->population_data.max_allowed_population_in_city) & (deaths_today < HCVD19->avg_death_rate)); ++i) {
-                if(HCVD19->entities[i].is_alive & \
+                if(HCVD19->entities[i].is_alive && \
                 ((HCVD19->entities[i].prob_better_immunity - HCVD19->entities[i].prob_early_death) < (NORMAL_DEATH_THRESHOLD))) {
                     HCVD19->entities[i].is_alive = 0;
                     ++deaths_today;
@@ -124,7 +124,7 @@ CVD19SSIM_STATUS_t cvd19ssim_normal_births(cvd19ssim_core_t *HCVID19) {
     uint32_t births_today = 0;
     if(HCVID19->population_data.cur_population < HCVID19->population_data.max_allowed_population_in_city) {
         if((RAND_GEN(PERCENT)) > (PERCENT - PERCENT_CHANCE_BIRTHS_OCCUR)) {
-            for(uint32_t i = 0; ((i < HCVID19->population_data.max_allowed_population_in_city) & (births_today < HCVID19->avg_birth_rate)); ++i) {
+            for(uint32_t i = 0; ((i < HCVID19->population_data.max_allowed_population_in_city) && (births_today < HCVID19->avg_birth_rate)); ++i) {
                 if(!HCVID19->entities[i].is_alive) {
                     init_entity(HCVID19->entities, i, 0);
                     HCVID19->population_data.cur_population += 1;
@@ -163,16 +163,16 @@ CVD19SSIM_STATUS_t cvd19ssim_covid_infections(cvd19ssim_core_t *HCVD19) {
 
     for(uint32_t i = 0; i < HCVD19->population_data.max_allowed_population_in_city; ++i) {
         
-        if(HCVD19->entities[i].is_alive & HCVD19->entities[i].entity_cvd_report.is_infected & \
+        if(HCVD19->entities[i].is_alive && HCVD19->entities[i].entity_cvd_report.is_infected && \
         !(HCVD19->entities[i].entity_cvd_report.is_quarantined | HCVD19->entities[i].entity_cvd_report.is_hospitalized)) {
             
             HCVD19->entities[i].entity_cvd_report.days_of_infections += 1;
             
             for(uint32_t j = 0; j < HCVD19->population_data.max_allowed_population_in_city; ++j) {
-                if(HCVD19->entities[j].is_alive & (i != j)) {
+                if(HCVD19->entities[j].is_alive && (i != j)) {
                     
                     if(check_if_in_spread_range(*HCVD19, i, j)){
-                        if((RAND_GEN(PERCENT) < PERCENT_CHANCE_OF_CVD_INF_IN_SPRD_DIST) & !(HCVD19->entities[j].entity_cvd_report.is_recovered)) {
+                        if((RAND_GEN(PERCENT) < PERCENT_CHANCE_OF_CVD_INF_IN_SPRD_DIST) && !(HCVD19->entities[j].entity_cvd_report.is_recovered)) {
                             temp_inf_ent_buff[buff_cntr++] = j;
                         }
                     }

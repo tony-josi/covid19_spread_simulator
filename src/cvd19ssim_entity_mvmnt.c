@@ -11,7 +11,7 @@
 int pos_move(cvd19ssim_core_t *HCVD19) {
     for(uint32_t i = 0; i < HCVD19->population_data.max_allowed_population_in_city; ++i) {
         
-        if(HCVD19->entities[i].is_alive & !(HCVD19->entities[i].entity_cvd_report.is_hospitalized)) {
+        if(HCVD19->entities[i].is_alive && !(HCVD19->entities[i].entity_cvd_report.is_hospitalized)) {
             if(CHECK_RANGE((HCVD19->entities[i].pos_data.cur_pos.x + HCVD19->entities[i].pos_data.speed.x)))
                 HCVD19->entities[i].pos_data.cur_pos.x += HCVD19->entities[i].pos_data.speed.x;
             if(CHECK_RANGE((HCVD19->entities[i].pos_data.cur_pos.y + HCVD19->entities[i].pos_data.speed.y)))
