@@ -57,6 +57,7 @@ void init_entity(entity_health_record_t *entities, uint32_t i, bool is_infected)
         RAND_GEN((MAX_PROB_OF_EARLY_NORMAL_DEATH - MIN_PROB_OF_EARLY_NORMAL_DEATH));
         entities[i].prob_better_immunity = MIN_PROB_OF_BETTER_IMMUNITY + \
         RAND_GEN((MAX_PROB_OF_BETTER_IMMUNITY - MIN_PROB_OF_BETTER_IMMUNITY));
+        entities[i].days_alive = 0;
 
         if(is_infected)
             init_entity_inf_cvd_report(entities, i);
@@ -87,6 +88,16 @@ void init_entity_inf_cvd_report(entity_health_record_t *entities, uint32_t j) {
     (((RAND_GEN(PERCENT)) < PERCENT_OF_AFFECTED_WITH_SYMPTOMS) ? 1 : 0);
 }
 
+FILE* init_log_file(char *f_name) {
+    FILE* l_fptr = NULL;
+    l_fptr = fopen(f_name, "w");
+    return l_fptr;
+}
+
+
+void de_init_log_file(FILE *l_fptr) {
+    fclose(l_fptr);
+} 
 
 #ifndef _WIN32
     static int sleep_in_ms(long ms) {

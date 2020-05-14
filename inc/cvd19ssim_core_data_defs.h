@@ -5,7 +5,7 @@
 
 #define INIT_POPL_LOWER_LIMIT_DIFF              100
 
-#define LOG_FILE_PATH                           "./log/cvd19.log"
+#define LOG_FILE_PATH                           "cvd19.log"
 
 #define MAX_SPREAD_DISTANCE                     3
 

@@ -14,6 +14,6 @@ void print_cvd19ssim_core_t(cvd19ssim_core_t *);
 void print_cvd19ssim_entity_health_record_t(cvd19ssim_core_t *, uint32_t);
 void init_entity(entity_health_record_t *, uint32_t, bool);
 void init_entity_inf_cvd_report(entity_health_record_t *, uint32_t);
-int  init_log_file(char *);
-
+FILE* init_log_file(char *);
+void de_init_log_file(FILE *);
 #endif /* _CVD19SSIM_UTIL */

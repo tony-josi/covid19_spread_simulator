@@ -11,11 +11,15 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
     
     srand(time(0)); 
     cvd19ssim_core_t hCVD19;
+    FILE *log_fptr;
 
     if(cvd19ssim_core_t_init(&hCVD19) != CVD19SSIM_SUCCESS)
         return CVD19SSIM_INIT_FAIL;
 
     if(cvd19ssim_core_t_init_entities(&hCVD19) != CVD19SSIM_SUCCESS)
+        return CVD19SSIM_INIT_FAIL;
+
+    if((log_fptr = init_log_file(LOG_FILE_PATH)) == NULL)
         return CVD19SSIM_INIT_FAIL;
 
     UNUSED(print_cvd19ssim_core_t);
@@ -37,6 +41,7 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
             return CVD19SSIM_FAIL;
         
         cvd19ssim_covid_infections(&hCVD19);
+        cvd19ssim_daily_summary_calc(&hCVD19);
 
         output_current_frame_ppm(&hCVD19);
 
@@ -58,6 +63,8 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
     
     if(cvd19ssim_core_t_deinit(&hCVD19) != CVD19SSIM_SUCCESS)
         return CVD19SSIM_INIT_FAIL;
+
+    de_init_log_file(log_fptr);
 
     return CVD19SSIM_SUCCESS;
 
@@ -187,4 +194,21 @@ CVD19SSIM_STATUS_t cvd19ssim_covid_infections(cvd19ssim_core_t *HCVD19) {
 
     return CVD19SSIM_SUCCESS;
 }
+
+CVD19SSIM_STATUS_t cvd19ssim_daily_summary_calc(cvd19ssim_core_t *HCVD19) {
+
+    HCVD19->days_passed += 1;
+    
+    for(uint32_t i = 0; i < HCVD19->population_data.max_allowed_population_in_city; ++i) {
+        if(HCVD19->entities[i].is_alive) {
+            HCVD19->entities[i].days_alive += 1;
+            if(HCVD19->entities[i].entity_cvd_report.is_infected)
+                HCVD19->entities[i].entity_cvd_report.days_of_infections += 1;
+        }
+    }
+
+    return CVD19SSIM_SUCCESS;
+
+} 
+
 

@@ -67,6 +67,7 @@ typedef struct _entity_health_record {
 
     cvd19ssim_entity_mvmnt_t                pos_data;
     cvd19ssim_core_covid_entity_report_t    entity_cvd_report;
+    uint32_t                                days_alive;
     bool                                    is_alive;
     uint8_t                                 prob_early_death;
     uint8_t                                 prob_better_immunity;
