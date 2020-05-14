@@ -5,9 +5,11 @@
 
 #define INIT_POPL_LOWER_LIMIT_DIFF              100
 
-#define ENABLE_LOGGING                          0
+#define ENABLE_LOGGING                          1
 
 #define MAX_NUM_OF_LOOPS_TO_LOG                 100
+
+#define LOG_FILE_LINE_BUFF_SIZE                 150
 
 #define LOG_FILE_PATH                           "cvd19.log"
 
@@ -44,8 +46,6 @@
 #define PERCENT_CHANCE_BIRTHS_OCCUR             5
 
 #define PERCENT_CHANCE_DEATHS_OCCUR             5
-
-#define LOG_FILE_LINE_BUFF_SIZE                 100
 
 #define INVERSE_DEATH_CONSTANT                  20
 

@@ -230,7 +230,7 @@ CVD19SSIM_STATUS_t cvd19ssim_daily_summary_calc(cvd19ssim_core_t *HCVD19) {
 
 CVD19SSIM_STATUS_t cvd19ssim_log_per_day_report(cvd19ssim_core_t *HCVD19, FILE *fptr) {
 
-    char str_buff[200];
+    char str_buff[LOG_FILE_LINE_BUFF_SIZE];
 
     sprintf(str_buff, "DAY: %d, CUR_POPL: %d, TOTAL_CVD_INF: %d, TOTAL_CVD_ACTIVE: %d, TOTAL_CVD_RECVRD: %d, TOTAL_DCSD: %d\n\r", \
     HCVD19->days_passed, HCVD19->population_data.cur_population, \
