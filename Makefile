@@ -2,8 +2,8 @@
 TARGET = cvd19ssim
 STD_LIBS = -lm
 CC = gcc
-#CFLAGS = -std=c99 -pedantic -Wall -Wextra -Wformat -Ofast -ggdb3
-CFLAGS = -std=c99 -pedantic -Wall -Wextra -Wformat -ggdb3 -mmacosx-version-min=10.0
+CFLAGS = -std=c99 -pedantic -Wall -Wextra -Wformat -Ofast -ggdb3
+CFLAGS_MAC = -std=c99 -pedantic -Wall -Wextra -Wformat -Ofast -ggdb3 -mmacosx-version-min=10.0
 LFLAGS = -pedantic -Wall -Wextra 
 CFLAGS_STRICT = -std=c99 -Wall -pedantic -ggdb3 \
 -pedantic-errors -Wextra -Waggregate-return -Wcast-align \
@@ -44,7 +44,7 @@ HEADERS = $(BASE_H_FILES) $(SRC_H_FILES)
 # Compile
 %.o: %.c $(HEADERS)
 	@echo Compiling: $< ...
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS_MAC) -c $< -o $@
 
 #.PRECIOUS: $(TARGET) $(OBJECTS)
 
