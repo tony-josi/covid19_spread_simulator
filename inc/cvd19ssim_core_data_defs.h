@@ -5,6 +5,10 @@
 
 #define INIT_POPL_LOWER_LIMIT_DIFF              100
 
+#define ENABLE_LOGGING                          0
+
+#define MAX_NUM_OF_LOOPS_TO_LOG                 100
+
 #define LOG_FILE_PATH                           "cvd19.log"
 
 #define MAX_SPREAD_DISTANCE                     3
@@ -44,8 +48,6 @@
 #define LOG_FILE_LINE_BUFF_SIZE                 100
 
 #define INVERSE_DEATH_CONSTANT                  20
-
-#define MAX_NUM_OF_LOOPS_TO_LOG                 100
 
 #define NORMAL_DEATH_THRESHOLD                  ((MIN_PROB_OF_BETTER_IMMUNITY + ((MAX_PROB_OF_BETTER_IMMUNITY - MIN_PROB_OF_BETTER_IMMUNITY) / 2)) - \
                                                 (MIN_PROB_OF_EARLY_NORMAL_DEATH + ((MAX_PROB_OF_EARLY_NORMAL_DEATH - MIN_PROB_OF_EARLY_NORMAL_DEATH) / 2)) - \
