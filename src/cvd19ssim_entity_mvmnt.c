@@ -14,16 +14,19 @@ int pos_move(cvd19ssim_core_t *HCVD19) {
         if(HCVD19->entities[i].is_alive && !(HCVD19->entities[i].entity_cvd_report.is_hospitalized)) {
             if(CHECK_RANGE((HCVD19->entities[i].pos_data.cur_pos.x + HCVD19->entities[i].pos_data.speed.x)))
                 HCVD19->entities[i].pos_data.cur_pos.x += HCVD19->entities[i].pos_data.speed.x;
-            if(CHECK_RANGE((HCVD19->entities[i].pos_data.cur_pos.y + HCVD19->entities[i].pos_data.speed.y)))
+
+            if(CHECK_RANGE((HCVD19->entities[i].pos_data.cur_pos.y + HCVD19->entities[i].pos_data.speed.y))) 
                 HCVD19->entities[i].pos_data.cur_pos.y += HCVD19->entities[i].pos_data.speed.y;
+            
         }
 
         if(RAND_GEN(PERCENT) > (PERCENT - PERCENT_OF_HIGH_SPEED))
-            HCVD19->entities[i].pos_data.speed.x = RAND_GEN(HIGH_SPEED_POSSIBLE);
+            HCVD19->entities[i].pos_data.speed.x = MIN_SPEED + RAND_GEN(HIGH_SPEED_POSSIBLE);
         else
             HCVD19->entities[i].pos_data.speed.x = MIN_SPEED + RAND_GEN(((MAX_SPEED - MIN_SPEED) + 1));
+
         if(RAND_GEN(PERCENT) > (PERCENT - PERCENT_OF_HIGH_SPEED))
-            HCVD19->entities[i].pos_data.speed.y = RAND_GEN(HIGH_SPEED_POSSIBLE);
+            HCVD19->entities[i].pos_data.speed.y = MIN_SPEED + RAND_GEN(HIGH_SPEED_POSSIBLE);
         else
             HCVD19->entities[i].pos_data.speed.y = MIN_SPEED + RAND_GEN(((MAX_SPEED - MIN_SPEED) + 1));
 
