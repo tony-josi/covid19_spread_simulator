@@ -66,7 +66,7 @@ void init_entity(entity_health_record_t *entities, uint32_t i, bool is_infected)
         entities[i].entity_cvd_report.have_symptoms = \
         (RAND_GEN(100) < PERCENT_OF_AFFECTED_WITH_SYMPTOMS) ? 1 : 0;
         entities[i].entity_cvd_report.is_hospitalized = 0;
-        entities[i].entity_cvd_report.is_quarantined = 0;
+        entities[i].entity_cvd_report.is_quarantined = 1;
         entities[i].entity_cvd_report.is_recovered = 0;
         entities[i].entity_cvd_report.is_tested = 0;
 

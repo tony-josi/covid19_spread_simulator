@@ -4,7 +4,7 @@
 #include <string.h>
 #include "../inc/cvd19ssim_ppm.h"
 
-static long colors[] = {0xFF0000, 0x00FF00, 0xFFFFFF};
+static long colors[] = {0xFF0000, 0x00FF00, 0xFFFFFF, 0x0000FF};
 static unsigned char ppm_buf[3L * PPM_SIZE * PPM_SIZE];
 
 static void buf_clear(void);
@@ -19,9 +19,16 @@ void output_current_frame_ppm(cvd19ssim_core_t *HCVD19) {
     for(uint32_t i = 0; i < HCVD19->population_data.cur_population; ++i) {
         if(HCVD19->entities[i].is_alive) {
 
-            if(HCVD19->entities[i].entity_cvd_report.is_infected)
-                buf_set_pixel(HCVD19->entities[i].pos_data.cur_pos.y * PIXEL_SIZE, \
-                HCVD19->entities[i].pos_data.cur_pos.x * PIXEL_SIZE, colors[0]);
+            if(HCVD19->entities[i].entity_cvd_report.is_infected) {
+                
+                if(HCVD19->entities[i].entity_cvd_report.is_quarantined)
+                    buf_set_pixel(HCVD19->entities[i].pos_data.cur_pos.y * PIXEL_SIZE, \
+                    HCVD19->entities[i].pos_data.cur_pos.x * PIXEL_SIZE, colors[3]);
+                
+                else
+                    buf_set_pixel(HCVD19->entities[i].pos_data.cur_pos.y * PIXEL_SIZE, \
+                    HCVD19->entities[i].pos_data.cur_pos.x * PIXEL_SIZE, colors[0]);
+            }
 
             else if(HCVD19->entities[i].entity_cvd_report.is_recovered)
                 buf_set_pixel(HCVD19->entities[i].pos_data.cur_pos.y * PIXEL_SIZE, \
