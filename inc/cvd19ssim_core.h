@@ -58,7 +58,7 @@ typedef struct _cvd19ssim_core_covid_entity_report {
     bool is_hospitalized;
     bool have_symptoms;
     bool is_tested;
-    bool days_of_infections;
+    uint8_t days_of_infections;
 
 } cvd19ssim_core_covid_entity_report_t;
 
@@ -104,6 +104,7 @@ CVD19SSIM_STATUS_t cvd19ssim_core_t_deinit(cvd19ssim_core_t *);
 CVD19SSIM_STATUS_t cvd19ssim_normal_deaths(cvd19ssim_core_t *);
 CVD19SSIM_STATUS_t cvd19ssim_normal_births(cvd19ssim_core_t *);
 CVD19SSIM_STATUS_t cvd19ssim_covid_infections(cvd19ssim_core_t *);
+CVD19SSIM_STATUS_t cvd19ssim_covid_deaths(cvd19ssim_core_t *);
 CVD19SSIM_STATUS_t cvd19ssim_daily_summary_calc(cvd19ssim_core_t *);
 CVD19SSIM_STATUS_t cvd19ssim_log_per_day_report(cvd19ssim_core_t *, FILE *);
 #endif /* _CVD19SSIM_CORE_H */

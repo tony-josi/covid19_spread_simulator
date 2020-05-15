@@ -1,9 +1,9 @@
 #ifndef _CVD19SSIM_CORE_DATA_DEFS_H
 #define _CVD19SSIM_CORE_DATA_DEFS_H
 
-#define MAX_ALLOWED_POPULATION                  200
+#define MAX_ALLOWED_POPULATION                  300
 
-#define INIT_POPL_LOWER_LIMIT_DIFF              100
+#define INIT_POPL_LOWER_LIMIT_DIFF              200
 
 #define ENABLE_LOGGING                          1
 
@@ -13,13 +13,15 @@
 
 #define LOG_FILE_PATH                           "cvd19.log"
 
-#define MAX_SPREAD_DISTANCE                     3
+#define MAX_SPREAD_DISTANCE                     10
 
 #define PERCENT_CHANCE_OF_CVD_INF_IN_SPRD_DIST  60
 
 #define MAX_SPEED                               2
 
 #define MIN_SPEED                               1
+
+#define CVD_DEATH_FACTOR                        50
 
 #define MAX_PROB_OF_EARLY_NORMAL_DEATH          60
 
@@ -48,6 +50,10 @@
 #define PERCENT_CHANCE_DEATHS_OCCUR             5
 
 #define INVERSE_DEATH_CONSTANT                  20
+
+#define INF_MIN_DEATH_DAYS                      14
+
+#define INF_MAX_DEATH_DAYS                      60
 
 #define NORMAL_DEATH_THRESHOLD                  ((MIN_PROB_OF_BETTER_IMMUNITY + ((MAX_PROB_OF_BETTER_IMMUNITY - MIN_PROB_OF_BETTER_IMMUNITY) / 2)) - \
                                                 (MIN_PROB_OF_EARLY_NORMAL_DEATH + ((MAX_PROB_OF_EARLY_NORMAL_DEATH - MIN_PROB_OF_EARLY_NORMAL_DEATH) / 2)) - \

@@ -59,16 +59,7 @@ void init_entity(entity_health_record_t *entities, uint32_t i, bool is_infected)
         RAND_GEN((MAX_PROB_OF_BETTER_IMMUNITY - MIN_PROB_OF_BETTER_IMMUNITY));
         entities[i].days_alive = 0;
 
-        if(is_infected)
-            init_entity_inf_cvd_report(entities, i);
-
-        entities[i].entity_cvd_report.days_of_infections = 0;
-        entities[i].entity_cvd_report.have_symptoms = \
-        (RAND_GEN(100) < PERCENT_OF_AFFECTED_WITH_SYMPTOMS) ? 1 : 0;
-        entities[i].entity_cvd_report.is_hospitalized = 0;
-        entities[i].entity_cvd_report.is_quarantined = 0;
-        entities[i].entity_cvd_report.is_recovered = 0;
-        entities[i].entity_cvd_report.is_tested = 0;
+        init_entity_inf_cvd_report(entities, i, is_infected);
 
         entities[i].pos_data.cur_pos.x = SQUARE_FRAME_SIZE + RAND_GEN((MAX_CITY_DEFAULT_SIZE - SQUARE_FRAME_SIZE - 5));
         entities[i].pos_data.cur_pos.y = SQUARE_FRAME_SIZE + RAND_GEN((MAX_CITY_DEFAULT_SIZE - SQUARE_FRAME_SIZE - 5));
@@ -78,14 +69,23 @@ void init_entity(entity_health_record_t *entities, uint32_t i, bool is_infected)
 
 }
 
-void init_entity_inf_cvd_report(entity_health_record_t *entities, uint32_t j) {
+void init_entity_inf_cvd_report(entity_health_record_t *entities, uint32_t j, bool is_infected) {
 
-    entities[j].entity_cvd_report.is_infected = 1;
+    if(is_infected) {
+        entities[j].entity_cvd_report.is_infected = 1;
+        entities[j].entity_cvd_report.have_symptoms = \
+        (((RAND_GEN(PERCENT)) < PERCENT_OF_AFFECTED_WITH_SYMPTOMS) ? 1 : 0);
+    }
+    else {
+        entities[j].entity_cvd_report.is_infected = 0;
+        entities[j].entity_cvd_report.have_symptoms = 0;
+    }
+        
     entities[j].entity_cvd_report.days_of_infections = 0;
     entities[j].entity_cvd_report.is_hospitalized = 0;
     entities[j].entity_cvd_report.is_quarantined = 0;
-    entities[j].entity_cvd_report.have_symptoms = \
-    (((RAND_GEN(PERCENT)) < PERCENT_OF_AFFECTED_WITH_SYMPTOMS) ? 1 : 0);
+    entities[j].entity_cvd_report.is_tested = 0;
+    
     
 }
 
@@ -99,6 +99,22 @@ FILE* init_log_file(char *f_name) {
 void de_init_log_file(FILE *l_fptr) {
     fclose(l_fptr);
 } 
+
+bool cvd_death_chance(entity_health_record_t *entty) {
+
+    uint32_t hosp_factor = ((entty->entity_cvd_report.is_hospitalized) ? (RAND_GEN(PERCENT)) : 0);
+    uint32_t temp_data = entty->prob_better_immunity + hosp_factor;
+    temp_data = (uint32_t) temp_data / 2;
+    //printf("hosp_factor: %d, temp_data: %d\n", hosp_factor, temp_data);
+
+    if(temp_data < CVD_DEATH_FACTOR)
+        return 1;
+
+    return 0;
+
+
+}
+
 
 #ifndef _WIN32
     static int sleep_in_ms(long ms) {

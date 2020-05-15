@@ -40,14 +40,16 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
     while (1) {
 
         sleep_ms();
+        cvd19ssim_daily_summary_calc(&hCVD19);
         cvd19ssim_normal_deaths(&hCVD19);
         cvd19ssim_normal_births(&hCVD19);
+        cvd19ssim_covid_deaths(&hCVD19);
         
         if(pos_move(&hCVD19))
             return CVD19SSIM_FAIL;
         
         cvd19ssim_covid_infections(&hCVD19);
-        cvd19ssim_daily_summary_calc(&hCVD19);
+        
 
 #if ENABLE_LOGGING
         if(loop_cntr++ < MAX_NUM_OF_LOOPS_TO_LOG)
@@ -169,7 +171,8 @@ CVD19SSIM_STATUS_t cvd19ssim_core_t_init_entities(cvd19ssim_core_t *HCVD19) {
             init_entity(HCVD19->entities, i, 1);
             ++infected_cntr;
         }
-        init_entity(HCVD19->entities, i, 0);
+        else
+            init_entity(HCVD19->entities, i, 0);
     }
 
     for (; i < HCVD19->population_data.max_allowed_population_in_city; i++)
@@ -189,10 +192,10 @@ CVD19SSIM_STATUS_t cvd19ssim_covid_infections(cvd19ssim_core_t *HCVD19) {
         if(HCVD19->entities[i].is_alive && HCVD19->entities[i].entity_cvd_report.is_infected && \
         !(HCVD19->entities[i].entity_cvd_report.is_quarantined | HCVD19->entities[i].entity_cvd_report.is_hospitalized)) {
             
-            HCVD19->entities[i].entity_cvd_report.days_of_infections += 1;
+            //HCVD19->entities[i].entity_cvd_report.days_of_infections += 1;
             
             for(uint32_t j = 0; j < HCVD19->population_data.max_allowed_population_in_city; ++j) {
-                if(HCVD19->entities[j].is_alive && (i != j)) {
+                if(HCVD19->entities[j].is_alive && (i != j) && !(HCVD19->entities[j].entity_cvd_report.is_infected)) {
                     
                     if(check_if_in_spread_range(*HCVD19, i, j)){
                         if((RAND_GEN(PERCENT) < PERCENT_CHANCE_OF_CVD_INF_IN_SPRD_DIST) && !(HCVD19->entities[j].entity_cvd_report.is_recovered)) {
@@ -206,7 +209,7 @@ CVD19SSIM_STATUS_t cvd19ssim_covid_infections(cvd19ssim_core_t *HCVD19) {
 
     for(uint32_t j = 0; j < buff_cntr; ++j) {
         HCVD19->population_data.total_infected += 1;
-        init_entity_inf_cvd_report(HCVD19->entities, temp_inf_ent_buff[j]);
+        init_entity_inf_cvd_report(HCVD19->entities, temp_inf_ent_buff[j], 1);
     }
 
     return CVD19SSIM_SUCCESS;
@@ -232,10 +235,10 @@ CVD19SSIM_STATUS_t cvd19ssim_log_per_day_report(cvd19ssim_core_t *HCVD19, FILE *
 
     char str_buff[LOG_FILE_LINE_BUFF_SIZE];
 
-    sprintf(str_buff, "DAY: %d, CUR_POPL: %d, TOTAL_CVD_INF: %d, TOTAL_CVD_ACTIVE: %d, TOTAL_CVD_RECVRD: %d, TOTAL_DCSD: %d\n\r", \
+    sprintf(str_buff, "DAY: %d, CUR_POPL: %d, TOTAL_CVD_INF: %d, TOTAL_CVD_ACTIVE: %d, TOTAL_CVD_RECVRD: %d, TOTAL_DCSD: %d\n", \
     HCVD19->days_passed, HCVD19->population_data.cur_population, \
     HCVD19->population_data.total_infected, \
-    (HCVD19->population_data.total_infected - HCVD19->population_data.total_recovered), \
+    (HCVD19->population_data.total_infected - HCVD19->population_data.total_recovered - HCVD19->population_data.total_infected_n_died), \
     HCVD19->population_data.total_recovered, \
     HCVD19->population_data.total_infected_n_died);
 
@@ -244,3 +247,22 @@ CVD19SSIM_STATUS_t cvd19ssim_log_per_day_report(cvd19ssim_core_t *HCVD19, FILE *
 
     return CVD19SSIM_SUCCESS;
 }
+
+CVD19SSIM_STATUS_t cvd19ssim_covid_deaths(cvd19ssim_core_t *HCVD19) {
+    for(uint32_t i = 0; i < HCVD19->population_data.max_allowed_population_in_city; ++i) {
+        if(HCVD19->entities[i].is_alive && HCVD19->entities[i].entity_cvd_report.is_infected) {
+            if(HCVD19->entities[i].entity_cvd_report.days_of_infections >= INF_MIN_DEATH_DAYS) {
+
+                if((HCVD19->entities[i].entity_cvd_report.days_of_infections > INF_MAX_DEATH_DAYS) ||\
+                (!cvd_death_chance(&(HCVD19->entities[i])))) {
+                    HCVD19->entities[i].is_alive = 0;
+                    HCVD19->population_data.cur_population -= 1;
+                    HCVD19->population_data.total_infected_n_died += 1;
+                }
+
+            }
+        }
+    }
+    return CVD19SSIM_SUCCESS;
+}
+
