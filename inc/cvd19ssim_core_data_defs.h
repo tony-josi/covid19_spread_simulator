@@ -57,7 +57,7 @@
 
 #define INF_MAX_DEATH_DAYS                      60
 
-#define MAX_TESTING_CAP                         5
+#define MAX_TESTING_CAP                         1
 
 #define MIN_PERCENT_OF_NEG_RESULTS              60
 
