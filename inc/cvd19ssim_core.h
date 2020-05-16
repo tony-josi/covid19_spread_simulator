@@ -47,6 +47,8 @@ typedef struct _cur_population_stat {
     uint32_t total_infected;
     uint32_t total_recovered;
     uint32_t total_infected_n_died;
+    uint32_t total_new_births;
+    uint32_t total_normal_deaths;
 
 } cur_population_stat_t;
 

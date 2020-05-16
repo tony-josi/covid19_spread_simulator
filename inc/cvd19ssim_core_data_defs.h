@@ -7,9 +7,11 @@
 
 #define ENABLE_LOGGING                          1
 
-#define MAX_NUM_OF_LOOPS_TO_LOG                 100
+#define MAX_NUM_OF_LOOPS_TO_LOG                 300
 
 #define LOG_FILE_LINE_BUFF_SIZE                 150
+
+#define DEBUG_MAX_DAYS                          350
 
 #define LOG_FILE_PATH                           "cvd19.log"
 
