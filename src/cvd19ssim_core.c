@@ -141,7 +141,9 @@ CVD19SSIM_STATUS_t cvd19ssim_normal_deaths(cvd19ssim_core_t *HCVD19) {
                     ++deaths_today;
                     HCVD19->population_data.cur_population -= 1;
                     HCVD19->population_data.total_normal_deaths += 1;
-                    //printf("CAN: %d     %d      %d\n", i, (HCVD19->entities[i].prob_better_immunity - HCVD19->entities[i].prob_early_death), MAG((NORMAL_DEATH_THRESHOLD)));
+                    //printf("CAN: %d     %d      %d\n", i, 
+                    //(HCVD19->entities[i].prob_better_immunity - HCVD19->entities[i].prob_early_death), 
+                    //MAG((NORMAL_DEATH_THRESHOLD)));
                 }
             }           
         }
@@ -151,7 +153,8 @@ CVD19SSIM_STATUS_t cvd19ssim_normal_deaths(cvd19ssim_core_t *HCVD19) {
 
 CVD19SSIM_STATUS_t cvd19ssim_normal_births(cvd19ssim_core_t *HCVID19) {
     uint32_t births_today = 0;
-    if(HCVID19->population_data.cur_population < HCVID19->population_data.max_allowed_population_in_city) {
+    if(HCVID19->population_data.cur_population < \
+    HCVID19->population_data.max_allowed_population_in_city) {
         if((RAND_GEN(PERCENT)) > (PERCENT - PERCENT_CHANCE_BIRTHS_OCCUR)) {
             for(uint32_t i = 0; ((i < HCVID19->population_data.max_allowed_population_in_city) && \
             (births_today < HCVID19->avg_birth_rate)); ++i) {
@@ -202,7 +205,8 @@ CVD19SSIM_STATUS_t cvd19ssim_covid_infections(cvd19ssim_core_t *HCVD19) {
             //HCVD19->entities[i].entity_cvd_report.days_of_infections += 1;
             
             for(uint32_t j = 0; j < HCVD19->population_data.max_allowed_population_in_city; ++j) {
-                if(HCVD19->entities[j].is_alive && (i != j) && !(HCVD19->entities[j].entity_cvd_report.is_infected)) {
+                if(HCVD19->entities[j].is_alive && (i != j) && \
+                !(HCVD19->entities[j].entity_cvd_report.is_infected)) {
                     
                     if(check_if_in_spread_range(*HCVD19, i, j)){
                         if((RAND_GEN(PERCENT) < PERCENT_CHANCE_OF_CVD_INF_IN_SPRD_DIST) && \
