@@ -1,5 +1,9 @@
 ## COVID 19 GRAPHICAL SPREAD SIMULATOR
 
+### WIP Sample
+
+![Sample WIP Output](https://github.com/TonyJosi97/covid19_spread_simulator/blob/master/cvdssim_wip_sample.gif)
+
 ### BASIC BRIEF DESIGN:
 
 ### Init func
