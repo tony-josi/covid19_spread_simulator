@@ -95,7 +95,7 @@ CVD19SSIM_STATUS_t cvd19ssim_core_t_init(cvd19ssim_core_t *HCVD19) {
     HCVD19->avg_birth_rate = 2 + RAND_GEN(2);
     HCVD19->avg_death_rate = 2 + RAND_GEN(2);
     HCVD19->capacity_per_hospital = 20;
-    HCVD19->num_of_hospitals_in_city = 4;
+    HCVD19->num_of_hospitals_in_city = 1;
     HCVD19->city_space = 108;
     HCVD19->cur_filled_hospital_capacity = 0;
     HCVD19->population_data.max_allowed_population_in_city = MAX_ALLOWED_POPULATION;
@@ -308,17 +308,17 @@ CVD19SSIM_STATUS_t cvd19ssim_daily_diagnosis(cvd19ssim_core_t *hCVD19) {
 
             if(RAND_GEN(PERCENT) > MIN_PERCENT_OF_NEG_RESULTS) {
 
-                if((RAND_GEN(PERCENT) > PERCENT_TEST_POSTIVE_HOSPITALIZED) && \
+                if((RAND_GEN(PERCENT) < PERCENT_TEST_POSTIVE_HOSPITALIZED) && \
                 (hCVD19->cur_filled_hospital_capacity < \
                 (hCVD19->capacity_per_hospital * hCVD19->num_of_hospitals_in_city))) {
 
                     rand_hosp = RAND_GEN(hCVD19->num_of_hospitals_in_city);
                     hCVD19->entities[i].entity_cvd_report.is_hospitalized = 1;
-                    hCVD19->entities[i].pos_data.cur_pos.x = \
+                    /* hCVD19->entities[i].pos_data.cur_pos.x = \
                     hCVD19->hospital_locations[rand_hosp].x;
                     hCVD19->entities[i].pos_data.cur_pos.y = \
                     hCVD19->hospital_locations[rand_hosp].y;
-                    hCVD19->cur_filled_hospital_capacity += 1;
+                    hCVD19->cur_filled_hospital_capacity += 1; */
                 }
     
                 else

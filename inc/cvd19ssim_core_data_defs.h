@@ -57,11 +57,11 @@
 
 #define INF_MAX_DEATH_DAYS                      60
 
-#define MAX_TESTING_CAP                         1
+#define MAX_TESTING_CAP                         5
 
 #define MIN_PERCENT_OF_NEG_RESULTS              60
 
-#define PERCENT_TEST_POSTIVE_HOSPITALIZED       50
+#define PERCENT_TEST_POSTIVE_HOSPITALIZED       80
 
 #define NORMAL_DEATH_THRESHOLD                  ((MIN_PROB_OF_BETTER_IMMUNITY + ((MAX_PROB_OF_BETTER_IMMUNITY - MIN_PROB_OF_BETTER_IMMUNITY) / 2)) - \
                                                 (MIN_PROB_OF_EARLY_NORMAL_DEATH + ((MAX_PROB_OF_EARLY_NORMAL_DEATH - MIN_PROB_OF_EARLY_NORMAL_DEATH) / 2)) - \
