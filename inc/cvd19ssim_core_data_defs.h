@@ -1,9 +1,9 @@
 #ifndef _CVD19SSIM_CORE_DATA_DEFS_H
 #define _CVD19SSIM_CORE_DATA_DEFS_H
 
-#define MAX_ALLOWED_POPULATION                  300
+#define MAX_ALLOWED_POPULATION                  400
 
-#define INIT_POPL_LOWER_LIMIT_DIFF              200
+#define INIT_POPL_LOWER_LIMIT_DIFF              300
 
 #define ENABLE_LOGGING                          1
 
@@ -57,9 +57,9 @@
 
 #define INF_MAX_DEATH_DAYS                      60
 
-#define MAX_TESTING_CAP                         20
+#define MAX_TESTING_CAP                         1
 
-#define MIN_PERCENT_OF_NEG_RESULTS              50
+#define MIN_PERCENT_OF_NEG_RESULTS              60
 
 #define NORMAL_DEATH_THRESHOLD                  ((MIN_PROB_OF_BETTER_IMMUNITY + ((MAX_PROB_OF_BETTER_IMMUNITY - MIN_PROB_OF_BETTER_IMMUNITY) / 2)) - \
                                                 (MIN_PROB_OF_EARLY_NORMAL_DEATH + ((MAX_PROB_OF_EARLY_NORMAL_DEATH - MIN_PROB_OF_EARLY_NORMAL_DEATH) / 2)) - \
