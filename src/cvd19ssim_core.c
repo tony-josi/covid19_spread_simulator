@@ -114,6 +114,17 @@ CVD19SSIM_STATUS_t cvd19ssim_core_t_init(cvd19ssim_core_t *HCVD19) {
     HCVD19->days_passed = 0;
     HCVD19->max_testing_capacity = MAX_TESTING_CAP;
 
+    if(!(HCVD19->hospital_locations = 
+    calloc(sizeof(position_t), HCVD19->num_of_hospitals_in_city)))
+        return CVD19SSIM_FAIL;
+
+    for(uint32_t i = 0; i < HCVD19->num_of_hospitals_in_city; ++i) {
+        HCVD19->hospital_locations[i].x = \
+        SQUARE_FRAME_SIZE + RAND_GEN((MAX_CITY_DEFAULT_SIZE - SQUARE_FRAME_SIZE - 5));
+        HCVD19->hospital_locations[i].y = \
+        SQUARE_FRAME_SIZE + RAND_GEN((MAX_CITY_DEFAULT_SIZE - SQUARE_FRAME_SIZE - 5));
+    }
+
     if(!(HCVD19->entities = 
     calloc(sizeof(entity_health_record_t), HCVD19->population_data.max_allowed_population_in_city)))
         return CVD19SSIM_FAIL;
@@ -286,7 +297,7 @@ CVD19SSIM_STATUS_t cvd19ssim_covid_deaths(cvd19ssim_core_t *HCVD19) {
 
 CVD19SSIM_STATUS_t cvd19ssim_daily_diagnosis(cvd19ssim_core_t *hCVD19) {
 
-    uint32_t temp_tests_done = 0;
+    uint32_t temp_tests_done = 0, rand_hosp = 0;
     for(uint32_t i = 0; i < hCVD19->population_data.max_allowed_population_in_city; ++i) {
 
         if(hCVD19->entities[i].is_alive && \
@@ -296,7 +307,22 @@ CVD19SSIM_STATUS_t cvd19ssim_daily_diagnosis(cvd19ssim_core_t *hCVD19) {
         (temp_tests_done < hCVD19->max_testing_capacity)) {
 
             if(RAND_GEN(PERCENT) > MIN_PERCENT_OF_NEG_RESULTS) {
-                hCVD19->entities[i].entity_cvd_report.is_quarantined = 1;
+
+                if((RAND_GEN(PERCENT) > PERCENT_TEST_POSTIVE_HOSPITALIZED) && \
+                (hCVD19->cur_filled_hospital_capacity < \
+                (hCVD19->capacity_per_hospital * hCVD19->num_of_hospitals_in_city))) {
+
+                    rand_hosp = RAND_GEN(hCVD19->num_of_hospitals_in_city);
+                    hCVD19->entities[i].entity_cvd_report.is_hospitalized = 1;
+                    hCVD19->entities[i].pos_data.cur_pos.x = \
+                    hCVD19->hospital_locations[rand_hosp].x;
+                    hCVD19->entities[i].pos_data.cur_pos.y = \
+                    hCVD19->hospital_locations[rand_hosp].y;
+                    hCVD19->cur_filled_hospital_capacity += 1;
+                }
+    
+                else
+                    hCVD19->entities[i].entity_cvd_report.is_quarantined = 1;
 
             }
             ++temp_tests_done;

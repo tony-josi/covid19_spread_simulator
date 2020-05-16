@@ -85,6 +85,7 @@ typedef struct _cvd19ssim_core {
     entity_health_record_t  *entities;
     uint32_t                num_of_hospitals_in_city;
     uint32_t                capacity_per_hospital;
+    position_t              *hospital_locations;
     uint32_t                cur_filled_hospital_capacity;
     uint32_t                max_spread_distance;
     uint32_t                initialy_infected;
