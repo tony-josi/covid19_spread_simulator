@@ -59,6 +59,8 @@
 
 #define MAX_TESTING_CAP                         20
 
+#define MIN_PERCENT_OF_NEG_RESULTS              50
+
 #define NORMAL_DEATH_THRESHOLD                  ((MIN_PROB_OF_BETTER_IMMUNITY + ((MAX_PROB_OF_BETTER_IMMUNITY - MIN_PROB_OF_BETTER_IMMUNITY) / 2)) - \
                                                 (MIN_PROB_OF_EARLY_NORMAL_DEATH + ((MAX_PROB_OF_EARLY_NORMAL_DEATH - MIN_PROB_OF_EARLY_NORMAL_DEATH) / 2)) - \
                                                 INVERSE_DEATH_CONSTANT)

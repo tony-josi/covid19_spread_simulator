@@ -48,6 +48,7 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
             return CVD19SSIM_FAIL;
         
         cvd19ssim_covid_infections(&hCVD19);
+        cvd19ssim_daily_diagnosis(&hCVD19);
         
 
 #if ENABLE_LOGGING
@@ -278,6 +279,28 @@ CVD19SSIM_STATUS_t cvd19ssim_covid_deaths(cvd19ssim_core_t *HCVD19) {
                 }
 
             }
+        }
+    }
+    return CVD19SSIM_SUCCESS;
+}
+
+CVD19SSIM_STATUS_t cvd19ssim_daily_diagnosis(cvd19ssim_core_t *hCVD19) {
+
+    uint32_t temp_tests_done = 0;
+    for(uint32_t i = 0; i < hCVD19->population_data.max_allowed_population_in_city; ++i) {
+
+        if(hCVD19->entities[i].is_alive && \
+        hCVD19->entities[i].entity_cvd_report.is_infected && \
+        !(hCVD19->entities[i].entity_cvd_report.is_hospitalized) && \
+        !(hCVD19->entities[i].entity_cvd_report.is_quarantined) && \
+        (temp_tests_done < hCVD19->max_testing_capacity)) {
+
+            if(RAND_GEN(PERCENT) > MIN_PERCENT_OF_NEG_RESULTS) {
+                hCVD19->entities[i].entity_cvd_report.is_quarantined = 1;
+
+            }
+            ++temp_tests_done;
+
         }
     }
     return CVD19SSIM_SUCCESS;
