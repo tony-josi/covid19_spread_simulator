@@ -111,6 +111,7 @@ CVD19SSIM_STATUS_t cvd19ssim_core_t_init(cvd19ssim_core_t *HCVD19) {
     HCVD19->population_data.total_normal_deaths = 0;
     HCVD19->max_spread_distance = MAX_SPREAD_DISTANCE;
     HCVD19->days_passed = 0;
+    HCVD19->max_testing_capacity = MAX_TESTING_CAP;
 
     if(!(HCVD19->entities = 
     calloc(sizeof(entity_health_record_t), HCVD19->population_data.max_allowed_population_in_city)))

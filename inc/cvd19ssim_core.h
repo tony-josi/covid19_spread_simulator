@@ -1,6 +1,7 @@
 #ifndef _CVD19SSIM_CORE_H
 #define _CVD19SSIM_CORE_H
 
+#include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
 
@@ -87,6 +88,7 @@ typedef struct _cvd19ssim_core {
     uint32_t                cur_filled_hospital_capacity;
     uint32_t                max_spread_distance;
     uint32_t                initialy_infected;
+    uint32_t                max_testing_capacity;
     uint32_t                days_passed;
     uint8_t                 avg_death_rate;
     uint8_t                 avg_birth_rate;
@@ -108,6 +110,7 @@ CVD19SSIM_STATUS_t cvd19ssim_normal_births(cvd19ssim_core_t *);
 CVD19SSIM_STATUS_t cvd19ssim_covid_infections(cvd19ssim_core_t *);
 CVD19SSIM_STATUS_t cvd19ssim_covid_deaths(cvd19ssim_core_t *);
 CVD19SSIM_STATUS_t cvd19ssim_daily_summary_calc(cvd19ssim_core_t *);
+CVD19SSIM_STATUS_t cvd19ssim_daily_diagnosis(cvd19ssim_core_t *);
 CVD19SSIM_STATUS_t cvd19ssim_log_per_day_report(cvd19ssim_core_t *, FILE *);
 #endif /* _CVD19SSIM_CORE_H */
 
