@@ -4,7 +4,7 @@
 #include <string.h>
 #include "../inc/cvd19ssim_ppm.h"
 
-static long colors[] = {0xFF0000, 0x00FF00, 0xD3D3D3, 0xFFD700};
+static long colors[] = {0xFF0000, 0x00FF00, 0xD3D3D3, 0xFFD700, 0x0000FF};
 static unsigned char ppm_buf[3L * PPM_SIZE * PPM_SIZE];
 
 static void buf_clear(void);
@@ -24,6 +24,10 @@ void output_current_frame_ppm(cvd19ssim_core_t *HCVD19) {
                 if(HCVD19->entities[i].entity_cvd_report.is_quarantined)
                     buf_set_pixel(HCVD19->entities[i].pos_data.cur_pos.y * PIXEL_SIZE, \
                     HCVD19->entities[i].pos_data.cur_pos.x * PIXEL_SIZE, colors[3]);
+
+                else if(HCVD19->entities[i].entity_cvd_report.is_hospitalized)
+                    buf_set_pixel(HCVD19->entities[i].pos_data.cur_pos.y * PIXEL_SIZE, \
+                    HCVD19->entities[i].pos_data.cur_pos.x * PIXEL_SIZE, colors[4]);
                 
                 else
                     buf_set_pixel(HCVD19->entities[i].pos_data.cur_pos.y * PIXEL_SIZE, \
