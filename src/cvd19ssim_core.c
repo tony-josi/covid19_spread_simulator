@@ -41,7 +41,7 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
         sleep_ms();
         cvd19ssim_daily_summary_calc(&hCVD19);
         cvd19ssim_normal_deaths(&hCVD19);
-        //cvd19ssim_normal_births(&hCVD19);
+        cvd19ssim_normal_births(&hCVD19);
         cvd19ssim_covid_deaths(&hCVD19);
         
         if(pos_move(&hCVD19))
