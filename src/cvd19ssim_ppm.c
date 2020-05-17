@@ -5,7 +5,7 @@
 #include "../inc/cvd19ssim_ppm.h"
 #include "../inc/cvd19ssim_core_data_defs.h"
 
-static long colors[] = {0xFF0000, 0x00FF00, 0xD3D3D3, 0xFFD700, 0x0000FF};
+static long colors[] = {0xFF0000, 0x0000FF, 0xD3D3D3, 0xFFD700, 0x00FF00};
 static unsigned char ppm_buf[3L * PPM_SIZE * PPM_SIZE];
 
 static void buf_clear(void);
