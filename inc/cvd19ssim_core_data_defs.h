@@ -63,6 +63,8 @@
 
 #define PERCENT_TEST_POSTIVE_HOSPITALIZED       80
 
+#define HOSPITAL_RADIUS                         3
+
 #define NORMAL_DEATH_THRESHOLD                  ((MIN_PROB_OF_BETTER_IMMUNITY + ((MAX_PROB_OF_BETTER_IMMUNITY - MIN_PROB_OF_BETTER_IMMUNITY) / 2)) - \
                                                 (MIN_PROB_OF_EARLY_NORMAL_DEATH + ((MAX_PROB_OF_EARLY_NORMAL_DEATH - MIN_PROB_OF_EARLY_NORMAL_DEATH) / 2)) - \
                                                 INVERSE_DEATH_CONSTANT)
