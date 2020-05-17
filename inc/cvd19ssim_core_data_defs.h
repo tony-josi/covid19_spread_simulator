@@ -59,6 +59,14 @@
 
 #define MIN_DAYS_TO_RECOVER                     14
 
+#define MAX_RECOVERY_PER_DAY                    5
+
+#define PERCENT_CHANCE_RCVRY_FROM_NO_TREATMNT   60
+
+#define PERCENT_CHANCE_RCVRY_FROM_QRNTN         70
+
+#define PERCENT_CHANCE_RCVRY_FROM_HOSPTZN       80
+
 #define MAX_TESTING_CAP                         1
 
 #define MIN_PERCENT_OF_NEG_RESULTS              60

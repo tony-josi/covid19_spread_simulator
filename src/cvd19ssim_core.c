@@ -49,7 +49,7 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
         
         cvd19ssim_covid_infections(&hCVD19);
         cvd19ssim_daily_diagnosis(&hCVD19);
-        
+        cvd19ssim_daily_recovery(&hCVD19);
 
 #if ENABLE_LOGGING
         if(loop_cntr <= MAX_NUM_OF_LOOPS_TO_LOG)
@@ -334,3 +334,44 @@ CVD19SSIM_STATUS_t cvd19ssim_daily_diagnosis(cvd19ssim_core_t *hCVD19) {
     return CVD19SSIM_SUCCESS;
 }
 
+CVD19SSIM_STATUS_t cvd19ssim_daily_recovery(cvd19ssim_core_t *HCVD19) {
+
+    uint32_t temp_rcvr_cntr = 0;
+    bool rcvrd = 0;
+    
+    for(uint32_t i = 0; i < HCVD19->population_data.max_allowed_population_in_city; ++i) {
+        
+        if(HCVD19->entities[i].is_alive && \
+        HCVD19->entities[i].entity_cvd_report.is_infected && \
+        (HCVD19->entities[i].entity_cvd_report.days_of_infections > MIN_DAYS_TO_RECOVER) && \
+        (temp_rcvr_cntr < MAX_RECOVERY_PER_DAY)) {
+
+            if(!(HCVD19->entities[i].entity_cvd_report.is_hospitalized) && \
+            !(HCVD19->entities[i].entity_cvd_report.is_quarantined)) {
+                if(RAND_GEN(PERCENT) < PERCENT_CHANCE_RCVRY_FROM_NO_TREATMNT)
+                    rcvrd = 1;
+            }
+
+            else if(HCVD19->entities[i].entity_cvd_report.is_hospitalized) {
+                if(RAND_GEN(PERCENT) < PERCENT_CHANCE_RCVRY_FROM_HOSPTZN) {
+                    rcvrd = 1;
+                    HCVD19->cur_filled_hospital_capacity -= 1;
+                }
+            }
+
+            else if(HCVD19->entities[i].entity_cvd_report.is_quarantined) {
+                if(RAND_GEN(PERCENT) < PERCENT_CHANCE_RCVRY_FROM_QRNTN)
+                    rcvrd = 1;
+            }
+
+            if(rcvrd) {
+                init_entity_inf_cvd_report(HCVD19->entities, i, 0);
+                HCVD19->entities[i].entity_cvd_report.is_recovered = 1;
+                HCVD19->population_data.total_recovered += 1;
+                ++temp_rcvr_cntr;
+                rcvrd = 0;
+            }
+        }
+    }
+    return CVD19SSIM_SUCCESS;
+}
