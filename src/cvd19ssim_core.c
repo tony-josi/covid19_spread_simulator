@@ -51,8 +51,8 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
 
         sleep_ms();
         cvd19ssim_daily_summary_calc(&hCVD19);
-        // cvd19ssim_normal_deaths(&hCVD19);
-        // cvd19ssim_normal_births(&hCVD19);
+        cvd19ssim_normal_deaths(&hCVD19);
+        cvd19ssim_normal_births(&hCVD19);
         cvd19ssim_covid_deaths(&hCVD19);
         
         if(pos_move(&hCVD19))
@@ -157,13 +157,14 @@ CVD19SSIM_STATUS_t cvd19ssim_normal_deaths(cvd19ssim_core_t *HCVD19) {
             (deaths_today < HCVD19->avg_death_rate)); ++i) {
                 if(HCVD19->entities[i].is_alive && \
                 ((HCVD19->entities[i].prob_better_immunity - HCVD19->entities[i].prob_early_death) < \
-                (NORMAL_DEATH_THRESHOLD))) {
+                (NORMAL_DEATH_THRESHOLD)) && (HCVD19->population_data.cur_population > 0)) {
                     HCVD19->entities[i].is_alive = 0;
                     ++deaths_today;
                     HCVD19->population_data.cur_population -= 1;
-                    HCVD19->population_data.total_normal_deaths += 1;
                     if(HCVD19->entities[i].entity_cvd_report.is_infected)
                         HCVD19->population_data.total_infected_n_died += 1;
+                    else
+                        HCVD19->population_data.total_normal_deaths += 1;
                     //printf("CAN: %d     %d      %d\n", i, 
                     //(HCVD19->entities[i].prob_better_immunity - HCVD19->entities[i].prob_early_death), 
                     //MAG((NORMAL_DEATH_THRESHOLD)));
@@ -181,7 +182,8 @@ CVD19SSIM_STATUS_t cvd19ssim_normal_births(cvd19ssim_core_t *HCVID19) {
         if((RAND_GEN(PERCENT)) > (PERCENT - PERCENT_CHANCE_BIRTHS_OCCUR)) {
             for(uint32_t i = 0; ((i < HCVID19->population_data.max_allowed_population_in_city) && \
             (births_today < HCVID19->avg_birth_rate)); ++i) {
-                if(!HCVID19->entities[i].is_alive) {
+                if(!(HCVID19->entities[i].is_alive) && (HCVID19->population_data.cur_population < \
+                HCVID19->population_data.max_allowed_population_in_city)) {
                     init_entity(HCVID19->entities, i, 0);
                     HCVID19->population_data.cur_population += 1;
                     HCVID19->population_data.total_new_births += 1;

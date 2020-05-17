@@ -7,9 +7,9 @@
 
 #define ENABLE_LOGGING                          1
 
-#define DEBUG_MAX_DAYS                          200
+#define DEBUG_MAX_DAYS                          250
 
-#define MAX_NUM_OF_LOOPS_TO_LOG                 200
+#define MAX_NUM_OF_LOOPS_TO_LOG                 250
 
 #define LOG_FILE_LINE_BUFF_SIZE                 150
 
