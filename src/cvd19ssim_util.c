@@ -114,6 +114,16 @@ bool cvd_death_chance(entity_health_record_t *entty) {
 
 }
 
+bool if_already_in_buffer(uint32_t *buff, uint32_t size, uint32_t item) {
+    
+    for(uint32_t i = 0; i < size; ++i) {
+        if(buff[i] == item)
+            return 1;
+    }
+    return 0;
+}
+
+
 
 #ifndef _WIN32
     static int sleep_in_ms(long ms) {

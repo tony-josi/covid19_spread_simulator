@@ -17,4 +17,5 @@ void init_entity_inf_cvd_report(entity_health_record_t *, uint32_t, bool);
 FILE* init_log_file(char *);
 void de_init_log_file(FILE *);
 bool cvd_death_chance(entity_health_record_t *);
+bool if_already_in_buffer(uint32_t *, uint32_t, uint32_t);
 #endif /* _CVD19SSIM_UTIL */

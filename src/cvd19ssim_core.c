@@ -234,8 +234,10 @@ CVD19SSIM_STATUS_t cvd19ssim_covid_infections(cvd19ssim_core_t *HCVD19) {
                     
                     if(check_if_in_spread_range(*HCVD19, i, j)){
                         if((RAND_GEN(PERCENT) < PERCENT_CHANCE_OF_CVD_INF_IN_SPRD_DIST)) {
-                            temp_inf_ent_buff[buff_cntr] = j;
-                            ++buff_cntr;
+                            if(!(if_already_in_buffer(temp_inf_ent_buff, buff_cntr, j))) {
+                                temp_inf_ent_buff[buff_cntr] = j;
+                                ++buff_cntr;
+                            }
                         }
                     }
                 }
