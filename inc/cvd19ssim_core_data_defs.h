@@ -1,9 +1,9 @@
 #ifndef _CVD19SSIM_CORE_DATA_DEFS_H
 #define _CVD19SSIM_CORE_DATA_DEFS_H
 
-#define MAX_ALLOWED_POPULATION                  400
+#define MAX_ALLOWED_POPULATION                  500
 
-#define INIT_POPL_LOWER_LIMIT_DIFF              300
+#define INIT_POPL_LOWER_LIMIT_DIFF              400
 
 #define ENABLE_LOGGING                          1
 
