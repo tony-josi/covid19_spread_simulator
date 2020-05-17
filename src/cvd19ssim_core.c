@@ -279,7 +279,9 @@ CVD19SSIM_STATUS_t cvd19ssim_log_per_day_report(cvd19ssim_core_t *HCVD19, FILE *
 TOTAL_CVD_RECVRD: %d, TOTAL_CVD_DCSD: %d, NEW_BIRTHS: %d, NORML_DEATHS: %d\n", \
     HCVD19->days_passed, HCVD19->population_data.cur_population, \
     HCVD19->population_data.total_infected, \
-    (HCVD19->population_data.total_infected - (HCVD19->population_data.total_recovered + HCVD19->population_data.total_infected_n_died)), \
+    (HCVD19->population_data.total_infected - \
+    (HCVD19->population_data.total_recovered + \
+    HCVD19->population_data.total_infected_n_died)), \
     HCVD19->population_data.total_recovered, \
     HCVD19->population_data.total_infected_n_died,
     HCVD19->population_data.total_new_births,
