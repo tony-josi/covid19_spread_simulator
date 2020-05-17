@@ -14,5 +14,6 @@
 #define CHECK_RANGE(N)                  (bool)(((N >= (SQUARE_FRAME_SIZE)) && (N < (MAX_CITY_DEFAULT_SIZE - SQUARE_FRAME_SIZE))) ? 1 : 0)
 
 void output_current_frame_ppm(cvd19ssim_core_t *);
+void highlight_hospitals(cvd19ssim_core_t *);
 
 #endif /* _CVD19SSIM_PPM */

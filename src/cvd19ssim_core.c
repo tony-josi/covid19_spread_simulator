@@ -334,9 +334,9 @@ CVD19SSIM_STATUS_t cvd19ssim_daily_diagnosis(cvd19ssim_core_t *hCVD19) {
                     rand_hosp = RAND_GEN(hCVD19->num_of_hospitals_in_city);
                     hCVD19->entities[i].entity_cvd_report.is_hospitalized = 1;
                     hCVD19->entities[i].pos_data.cur_pos.x = \
-                    hCVD19->hospital_locations[rand_hosp].x + RAND_GEN(HOSPITAL_RADIUS);
+                    hCVD19->hospital_locations[rand_hosp].x;
                     hCVD19->entities[i].pos_data.cur_pos.y = \
-                    hCVD19->hospital_locations[rand_hosp].y + RAND_GEN(HOSPITAL_RADIUS);
+                    hCVD19->hospital_locations[rand_hosp].y;
                     hCVD19->cur_filled_hospital_capacity += 1; 
                 }
     

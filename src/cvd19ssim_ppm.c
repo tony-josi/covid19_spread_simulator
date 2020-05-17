@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../inc/cvd19ssim_ppm.h"
+#include "../inc/cvd19ssim_core_data_defs.h"
 
 static long colors[] = {0xFF0000, 0x00FF00, 0xD3D3D3, 0xFFD700, 0x0000FF};
 static unsigned char ppm_buf[3L * PPM_SIZE * PPM_SIZE];
@@ -25,9 +26,11 @@ void output_current_frame_ppm(cvd19ssim_core_t *HCVD19) {
                     buf_set_pixel(HCVD19->entities[i].pos_data.cur_pos.y * PIXEL_SIZE, \
                     HCVD19->entities[i].pos_data.cur_pos.x * PIXEL_SIZE, colors[3]);
 
-                else if(HCVD19->entities[i].entity_cvd_report.is_hospitalized)
+                else if(HCVD19->entities[i].entity_cvd_report.is_hospitalized) {
                     buf_set_pixel(HCVD19->entities[i].pos_data.cur_pos.y * PIXEL_SIZE, \
                     HCVD19->entities[i].pos_data.cur_pos.x * PIXEL_SIZE, colors[4]);
+                    highlight_hospitals(HCVD19);
+                }
                 
                 else
                     buf_set_pixel(HCVD19->entities[i].pos_data.cur_pos.y * PIXEL_SIZE, \
@@ -77,3 +80,11 @@ void buf_write(void) {
     printf("P6\n%d %d\n255\n", PPM_SIZE, PPM_SIZE);
     fwrite(ppm_buf, sizeof(ppm_buf), 1, stdout);
 }
+
+void highlight_hospitals(cvd19ssim_core_t *HCVD19) {
+    for(uint32_t i = 0; i < HCVD19->num_of_hospitals_in_city; ++i) 
+        for(int j = -(HOSPITAL_RADIUS); j < (HOSPITAL_RADIUS); ++j) 
+            for(int k = -(HOSPITAL_RADIUS); k < (HOSPITAL_RADIUS); ++k) 
+                buf_set_pixel((HCVD19->hospital_locations[i].y + j) * PIXEL_SIZE, (HCVD19->hospital_locations[i].x + k) * PIXEL_SIZE, colors[4]);
+}
+
