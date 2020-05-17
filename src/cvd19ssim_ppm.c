@@ -46,6 +46,7 @@ void output_current_frame_ppm(cvd19ssim_core_t *HCVD19) {
     }
 
     buf_write();
+
 }
 
 

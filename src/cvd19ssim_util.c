@@ -86,7 +86,6 @@ void init_entity_inf_cvd_report(entity_health_record_t *entities, uint32_t j, bo
     entities[j].entity_cvd_report.is_quarantined = 0;
     entities[j].entity_cvd_report.is_tested = 0;
     
-    
 }
 
 FILE* init_log_file(char *f_name) {

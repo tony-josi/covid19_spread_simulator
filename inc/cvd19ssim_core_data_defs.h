@@ -7,11 +7,11 @@
 
 #define ENABLE_LOGGING                          1
 
+#define DEBUG_MAX_DAYS                          300
+
 #define MAX_NUM_OF_LOOPS_TO_LOG                 300
 
 #define LOG_FILE_LINE_BUFF_SIZE                 150
-
-#define DEBUG_MAX_DAYS                          350
 
 #define LOG_FILE_PATH                           "cvd19.log"
 
@@ -23,7 +23,7 @@
 
 #define MIN_SPEED                               1
 
-#define CVD_DEATH_FACTOR                        50
+#define CVD_DEATH_FACTOR                        20
 
 #define MAX_PROB_OF_EARLY_NORMAL_DEATH          60
 
@@ -53,19 +53,19 @@
 
 #define INVERSE_DEATH_CONSTANT                  20
 
-#define INF_MIN_DEATH_DAYS                      28
+#define INF_MIN_DEATH_DAYS                      21
 
-#define INF_MAX_DEATH_DAYS                      60
+#define INF_MAX_DEATH_DAYS                      56
 
-#define MIN_DAYS_TO_RECOVER                     14
+#define MIN_DAYS_TO_RECOVER                     28
 
 #define MAX_RECOVERY_PER_DAY                    5
 
-#define PERCENT_CHANCE_RCVRY_FROM_NO_TREATMNT   60
+#define PERCENT_CHANCE_RCVRY_FROM_NO_TREATMNT   30
 
-#define PERCENT_CHANCE_RCVRY_FROM_QRNTN         70
+#define PERCENT_CHANCE_RCVRY_FROM_QRNTN         45
 
-#define PERCENT_CHANCE_RCVRY_FROM_HOSPTZN       80
+#define PERCENT_CHANCE_RCVRY_FROM_HOSPTZN       70
 
 #define MAX_TESTING_CAP                         1
 
