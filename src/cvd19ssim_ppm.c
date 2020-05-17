@@ -85,6 +85,7 @@ void highlight_hospitals(cvd19ssim_core_t *HCVD19) {
     for(uint32_t i = 0; i < HCVD19->num_of_hospitals_in_city; ++i) 
         for(int j = -(HOSPITAL_RADIUS); j < (HOSPITAL_RADIUS); ++j) 
             for(int k = -(HOSPITAL_RADIUS); k < (HOSPITAL_RADIUS); ++k) 
-                buf_set_pixel((HCVD19->hospital_locations[i].y + j) * PIXEL_SIZE, (HCVD19->hospital_locations[i].x + k) * PIXEL_SIZE, colors[4]);
+                buf_set_pixel((HCVD19->hospital_locations[i].y + j) * PIXEL_SIZE, \
+                (HCVD19->hospital_locations[i].x + k) * PIXEL_SIZE, colors[4]);
 }
 
