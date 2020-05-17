@@ -53,9 +53,11 @@
 
 #define INVERSE_DEATH_CONSTANT                  20
 
-#define INF_MIN_DEATH_DAYS                      14
+#define INF_MIN_DEATH_DAYS                      28
 
 #define INF_MAX_DEATH_DAYS                      60
+
+#define MIN_DAYS_TO_RECOVER                     14
 
 #define MAX_TESTING_CAP                         1
 

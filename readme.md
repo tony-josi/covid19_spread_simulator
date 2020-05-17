@@ -59,12 +59,12 @@
             * no. of tests done should be in the range [noof. with symptoms, max tests available]
             * update total_infected
 
-    * hospitalization
-        * if cur_filled_hosp_capacity < num_of_hospitals_in_city * capacity_per_hospital
-            * all +ve tests subjects are hospitalized
-        * else 
-            * avail. part of all +ve tests subjects are hospitalized
-        * increment cur_filled_hosp_capacity by +ve cases admitted
+        * hospitalization
+            * if cur_filled_hosp_capacity < num_of_hospitals_in_city * capacity_per_hospital
+                * all +ve tests subjects are hospitalized
+            * else 
+                * avail. part of all +ve tests subjects are hospitalized
+            * increment cur_filled_hosp_capacity by +ve cases admitted
 
 
     * recovery
