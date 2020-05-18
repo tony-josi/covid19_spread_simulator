@@ -7,6 +7,10 @@
 
 #define INIT_POPL_LOWER_LIMIT_DIFF              400
 
+#define NUM_OF_HOSPITALS                        3
+
+#define CAPACITY_PER_HOSPITAL                   10
+
 #define ENABLE_LOGGING                          1
 
 #define DEBUG_MAX_DAYS                          250
@@ -41,9 +45,9 @@
 
 #define PERCENT_CHANCE_RCVRY_FROM_HOSPTZN       70
 
-#define MAX_TESTING_CAP                         1
+#define MAX_TESTING_CAP                         2
 
-#define MIN_PERCENT_OF_NEG_RESULTS              60
+#define MIN_PERCENT_OF_NEG_RESULTS              40
 
 #define PERCENT_TEST_POSTIVE_HOSPITALIZED       80
 

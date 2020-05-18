@@ -5,9 +5,9 @@
 
 #define LOG_FILE_PATH                           "cvd19.log"
 
-#define MAX_SPREAD_DISTANCE                     10
+#define MAX_SPREAD_DISTANCE                     15
 
-#define PERCENT_CHANCE_OF_CVD_INF_IN_SPRD_DIST  60
+#define PERCENT_CHANCE_OF_CVD_INF_IN_SPRD_DIST  50
 
 #define CVD_DEATH_FACTOR                        20
 

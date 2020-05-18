@@ -58,8 +58,8 @@ CVD19SSIM_STATUS_t cvd19ssim_core_t_init(cvd19ssim_core_t *HCVD19) {
     UNUSED(RAND_GEN(3));
     HCVD19->avg_birth_rate = 2 + RAND_GEN(2);
     HCVD19->avg_death_rate = 2 + RAND_GEN(2);
-    HCVD19->capacity_per_hospital = 20;
-    HCVD19->num_of_hospitals_in_city = 3;
+    HCVD19->capacity_per_hospital = CAPACITY_PER_HOSPITAL;
+    HCVD19->num_of_hospitals_in_city = NUM_OF_HOSPITALS;
     HCVD19->city_space = 108;
     HCVD19->cur_filled_hospital_capacity = 0;
     HCVD19->population_data.max_allowed_population_in_city = MAX_ALLOWED_POPULATION;
