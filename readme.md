@@ -18,3 +18,7 @@ make
 ./cvd19ssim | mpv --no-correct-pts --fps=5 -
 ```
 
+### Basic Design
+
+[Basic control flow](https://github.com/TonyJosi97/covid19_spread_simulator/blob/code_cleanup/docs/design_breif.md)
+
