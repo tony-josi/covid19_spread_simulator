@@ -4,7 +4,7 @@ COVID19 SPREAD SIMULATOR is a graphical simulator that simulates the **spread(in
 
 The simulator is highly configurable with options to configure limited set of settings using the structure feilds by init functions or building more customized verion by editing private/core define files (such as city size).
 
-The program output map of the city with entitiy locations in [portable pixmap format (PPM)](https://en.wikipedia.org/wiki/Netpbm) image frames. These frames are then used to generate video using video players that supports input fromm ppm image frames such as [mpv](https://en.wikipedia.org/wiki/Mpv_(media_player)).
+The program outputs map of the city with entitiy locations in [portable pixmap format (PPM)](https://en.wikipedia.org/wiki/Netpbm) image frames. These frames are then used to generate video using video players that supports input from ppm image frames such as [mpv](https://en.wikipedia.org/wiki/Mpv_(media_player)).
 
 #### Basic Design
 
