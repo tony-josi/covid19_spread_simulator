@@ -8,7 +8,6 @@ CVD19SSIM_STATUS_t cvd19ssim_struct_init(cvd19ssim_core_t *hCVD19) {
     
     if(cvd19ssim_core_t_init(hCVD19) != CVD19SSIM_SUCCESS)
         return CVD19SSIM_INIT_FAIL;
-
     if(cvd19ssim_core_t_init_entities(hCVD19) != CVD19SSIM_SUCCESS)
         return CVD19SSIM_INIT_FAIL;
     
@@ -27,7 +26,6 @@ CVD19SSIM_STATUS_t cvd19ssim_daily_summary_calc(cvd19ssim_core_t *HCVD19) {
                 HCVD19->entities[i].entity_cvd_report.days_of_infections += 1;
         }
     }
-
     return CVD19SSIM_SUCCESS;
 
 } 
@@ -85,16 +83,11 @@ CVD19SSIM_STATUS_t cvd19ssim_core_t_init(cvd19ssim_core_t *HCVD19) {
         return CVD19SSIM_FAIL;
 
     for(uint32_t i = 0; i < HCVD19->num_of_hospitals_in_city; ++i) {
-/*         HCVD19->hospital_locations[i].x = \
-        SQUARE_FRAME_SIZE + RAND_GEN((MAX_CITY_DEFAULT_SIZE - SQUARE_FRAME_SIZE - 5));
-        HCVD19->hospital_locations[i].y = \
-        SQUARE_FRAME_SIZE + RAND_GEN((MAX_CITY_DEFAULT_SIZE - SQUARE_FRAME_SIZE - 5)); */
         HCVD19->hospital_locations[i].x = SQUARE_FRAME_SIZE + (MAX_CITY_DEFAULT_SIZE / 2);
         HCVD19->hospital_locations[i].y = SQUARE_FRAME_SIZE + \
         ((MAX_CITY_DEFAULT_SIZE / HCVD19->num_of_hospitals_in_city) / 2) + \
         ((i) * (MAX_CITY_DEFAULT_SIZE / HCVD19->num_of_hospitals_in_city));
     }
-
     if(!(HCVD19->entities = 
     calloc(sizeof(entity_health_record_t), HCVD19->population_data.max_allowed_population_in_city)))
         return CVD19SSIM_FAIL;
