@@ -16,7 +16,7 @@
 
 
 ### Main Loop
-* **WHile(1)**
+* **while(1):**
 
     * New normal deaths
         * Normal death for non infected persons
