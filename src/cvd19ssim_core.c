@@ -62,7 +62,6 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
 
 CVD19SSIM_STATUS_t cvd19ssim_normal_deaths(cvd19ssim_core_t *HCVD19) {
     uint32_t deaths_today = 0;
-    //printf("DTH: %d\n", (NORMAL_DEATH_THRESHOLD));
     if(HCVD19->population_data.cur_population > 0) {
         if((RAND_GEN(PERCENT)) > (PERCENT - PERCENT_CHANCE_DEATHS_OCCUR)) {
             for(uint32_t i = 0; ((i < HCVD19->population_data.max_allowed_population_in_city) & \
@@ -97,7 +96,6 @@ CVD19SSIM_STATUS_t cvd19ssim_normal_births(cvd19ssim_core_t *HCVID19) {
                     HCVID19->population_data.cur_population += 1;
                     HCVID19->population_data.total_new_births += 1;
                     ++births_today;
-                    //printf("Birth i: %d\n", i);
                 }
             }
         }
@@ -131,7 +129,6 @@ CVD19SSIM_STATUS_t cvd19ssim_covid_infections(cvd19ssim_core_t *HCVD19) {
     uint32_t temp_inf_ent_buff[MAX_ALLOWED_POPULATION], buff_cntr = 0;
 
     for(uint32_t i = 0; i < HCVD19->population_data.max_allowed_population_in_city; ++i) {
-        
         if(HCVD19->entities[i].is_alive && HCVD19->entities[i].entity_cvd_report.is_infected && \
         !(HCVD19->entities[i].entity_cvd_report.is_quarantined || \
         HCVD19->entities[i].entity_cvd_report.is_hospitalized)) {
@@ -153,7 +150,6 @@ CVD19SSIM_STATUS_t cvd19ssim_covid_infections(cvd19ssim_core_t *HCVD19) {
             }
         } 
     }
-
     for(uint32_t j = 0; j < buff_cntr; ++j) {
         HCVD19->population_data.total_infected += 1;
         init_entity_inf_cvd_report(HCVD19->entities, temp_inf_ent_buff[j], 1);
@@ -176,7 +172,6 @@ CVD19SSIM_STATUS_t cvd19ssim_covid_deaths(cvd19ssim_core_t *HCVD19) {
                         HCVD19->cur_filled_hospital_capacity -= 1;
                     init_entity_inf_cvd_report(HCVD19->entities, i, 0);
                 }
-
             }
         }
     }
@@ -187,7 +182,6 @@ CVD19SSIM_STATUS_t cvd19ssim_daily_diagnosis(cvd19ssim_core_t *hCVD19) {
 
     uint32_t temp_tests_done = 0, rand_hosp = 0;
     for(uint32_t i = 0; i < hCVD19->population_data.max_allowed_population_in_city; ++i) {
-
         if(hCVD19->entities[i].is_alive && \
         hCVD19->entities[i].entity_cvd_report.is_infected && \
         !(hCVD19->entities[i].entity_cvd_report.is_hospitalized) && \
@@ -195,11 +189,9 @@ CVD19SSIM_STATUS_t cvd19ssim_daily_diagnosis(cvd19ssim_core_t *hCVD19) {
         (temp_tests_done < hCVD19->max_testing_capacity)) {
 
             if(RAND_GEN(PERCENT) > MIN_PERCENT_OF_NEG_RESULTS) {
-
                 if((RAND_GEN(PERCENT) < PERCENT_TEST_POSTIVE_HOSPITALIZED) && \
                 (hCVD19->cur_filled_hospital_capacity < \
                 (hCVD19->capacity_per_hospital * hCVD19->num_of_hospitals_in_city))) {
-
                     rand_hosp = RAND_GEN(hCVD19->num_of_hospitals_in_city);
                     hCVD19->entities[i].entity_cvd_report.is_hospitalized = 1;
                     hCVD19->entities[i].pos_data.cur_pos.x = \
@@ -211,10 +203,8 @@ CVD19SSIM_STATUS_t cvd19ssim_daily_diagnosis(cvd19ssim_core_t *hCVD19) {
     
                 else
                     hCVD19->entities[i].entity_cvd_report.is_quarantined = 1;
-
             }
             ++temp_tests_done;
-
         }
     }
     return CVD19SSIM_SUCCESS;
@@ -224,9 +214,8 @@ CVD19SSIM_STATUS_t cvd19ssim_daily_recovery(cvd19ssim_core_t *HCVD19) {
 
     uint32_t temp_rcvr_cntr = 0;
     bool rcvrd = 0;
-    
-    for(uint32_t i = 0; i < HCVD19->population_data.max_allowed_population_in_city; ++i) {
-        
+
+    for(uint32_t i = 0; i < HCVD19->population_data.max_allowed_population_in_city; ++i) {        
         if(HCVD19->entities[i].is_alive && \
         HCVD19->entities[i].entity_cvd_report.is_infected && \
         (HCVD19->entities[i].entity_cvd_report.days_of_infections > MIN_DAYS_TO_RECOVER) && \
@@ -237,19 +226,16 @@ CVD19SSIM_STATUS_t cvd19ssim_daily_recovery(cvd19ssim_core_t *HCVD19) {
                 if(RAND_GEN(PERCENT) < PERCENT_CHANCE_RCVRY_FROM_NO_TREATMNT)
                     rcvrd = 1;
             }
-
             if(HCVD19->entities[i].entity_cvd_report.is_hospitalized) {
                 if(RAND_GEN(PERCENT) < PERCENT_CHANCE_RCVRY_FROM_HOSPTZN) {
                     rcvrd = 1;
                     HCVD19->cur_filled_hospital_capacity -= 1;
                 }
             }
-
             if(HCVD19->entities[i].entity_cvd_report.is_quarantined) {
                 if(RAND_GEN(PERCENT) < PERCENT_CHANCE_RCVRY_FROM_QRNTN)
                     rcvrd = 1;
             }
-
             if(rcvrd) {
                 init_entity_inf_cvd_report(HCVD19->entities, i, 0);
                 HCVD19->entities[i].entity_cvd_report.is_recovered = 1;
