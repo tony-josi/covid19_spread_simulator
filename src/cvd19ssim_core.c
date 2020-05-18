@@ -14,6 +14,7 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
     uint64_t loop_cntr = 0;
     FILE *log_fptr;
     bool is_log_closed = 0;
+    CVD19SSIM_STATUS_t ret_code = CVD19SSIM_SUCCESS;
 
     if(cvd19ssim_core_t_init(&hCVD19) != CVD19SSIM_SUCCESS)
         return CVD19SSIM_INIT_FAIL;
@@ -31,7 +32,7 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
         output_current_frame_ppm(&hCVD19);
     }
     
-    while ((loop_cntr++ )< DEBUG_MAX_DAYS) {
+    while (((loop_cntr++ )< DEBUG_MAX_DAYS) && (ret_code == CVD19SSIM_SUCCESS)) {
 
 #if ENABLE_LOGGING
         if(loop_cntr <= MAX_NUM_OF_LOOPS_TO_LOG)
@@ -44,27 +45,25 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
 #endif /* ENABLE_LOGGING */
 
         sleep_ms();
-        cvd19ssim_daily_summary_calc(&hCVD19);
-        cvd19ssim_normal_deaths(&hCVD19);
-        cvd19ssim_normal_births(&hCVD19);
-        cvd19ssim_covid_deaths(&hCVD19);
+        ret_code |= cvd19ssim_daily_summary_calc(&hCVD19);
+        ret_code |= cvd19ssim_normal_deaths(&hCVD19);
+        ret_code |= cvd19ssim_normal_births(&hCVD19);
+        ret_code |= cvd19ssim_covid_deaths(&hCVD19);
         
         if(pos_move(&hCVD19))
             return CVD19SSIM_FAIL;
         
-        cvd19ssim_covid_infections(&hCVD19);
-        cvd19ssim_daily_diagnosis(&hCVD19);
-        cvd19ssim_daily_recovery(&hCVD19);
+        ret_code |= cvd19ssim_covid_infections(&hCVD19);
+        ret_code |= cvd19ssim_daily_diagnosis(&hCVD19);
+        ret_code |= cvd19ssim_daily_recovery(&hCVD19);
         
         output_current_frame_ppm(&hCVD19);
-
     }
 
     if(cvd19ssim_core_t_deinit(&hCVD19) != CVD19SSIM_SUCCESS)
         return CVD19SSIM_INIT_FAIL;
 
     return CVD19SSIM_SUCCESS;
-
 }
 
 CVD19SSIM_STATUS_t cvd19ssim_core_t_init(cvd19ssim_core_t *HCVD19) {
