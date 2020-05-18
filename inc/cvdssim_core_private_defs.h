@@ -30,3 +30,4 @@
 #define INVERSE_DEATH_CONSTANT                  20
 
 #endif /* _CVD19SSIM_CORE_PRIV_DATA_DEFS_H */
+
