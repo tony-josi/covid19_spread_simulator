@@ -18,6 +18,17 @@ The simulator is highly configurable with options to configure limited set of se
 * **GREEN**:    Green represents COVID recovered entities
 * **YELLOW**:   Entities infected and quarantined
 
+#### Initial Stats:
+```
+CUR_POPL: 440, TOTAL_CVD_INF: 14, TOTAL_CVD_ACTIVE: 14, TOTAL_CVD_RECVRD: 0, TOTAL_CVD_DCSD: 0, NEW_BIRTHS: 0, NORML_DEATHS: 0
+```
+
+#### After 250 Days:
+```
+CUR_POPL: 345, TOTAL_CVD_INF: 429, TOTAL_CVD_ACTIVE: 0, TOTAL_CVD_RECVRD: 331, TOTAL_CVD_DCSD: 98, NEW_BIRTHS: 28, NORML_DEATHS: 25
+
+```
+
 ### Build & Run:
 
 #### Build
