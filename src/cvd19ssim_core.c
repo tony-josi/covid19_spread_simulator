@@ -26,12 +26,6 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
         return CVD19SSIM_INIT_FAIL;
 #endif /* ENABLE_LOGGING */
 
-    UNUSED(print_cvd19ssim_core_t);
-    UNUSED(print_cvd19ssim_entity_health_record_t);
-    UNUSED(loop_cntr);
-    UNUSED(is_log_closed);
-    UNUSED(log_fptr);
-
     for(int i = 0; i < STILL_FRAMES_AT_START; i++) {
         sleep_ms();
         output_current_frame_ppm(&hCVD19);
@@ -66,29 +60,6 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
 
     }
 
-/*     uint32_t still_inf = 0;
-    for(uint32_t k = 0; k  < hCVD19.population_data.max_allowed_population_in_city; ++k) {
-        if(hCVD19.entities[k].entity_cvd_report.is_infected)
-            still_inf++;
-    }
-    printf("STILL_INF: %d\n", still_inf); */
-    
-/*     uint32_t temp_loop = 0;
-    while (temp_loop < 1000) {
-        sleep_ms();
-        //printf("Death\n");
-        cvd19ssim_normal_deaths(&hCVD19);
-        //printf("Birth\n");
-        cvd19ssim_normal_births(&hCVD19);
-        //printf("Inf\n");
-        pos_move(&hCVD19);
-        cvd19ssim_covid_infections(&hCVD19);
-        cvd19ssim_daily_summary_calc(&hCVD19);
-        cvd19ssim_log_per_day_report(&hCVD19, log_fptr);
-        printf("___________________\n");
-        temp_loop++;
-    } */
-    
     if(cvd19ssim_core_t_deinit(&hCVD19) != CVD19SSIM_SUCCESS)
         return CVD19SSIM_INIT_FAIL;
 

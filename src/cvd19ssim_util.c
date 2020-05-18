@@ -8,7 +8,9 @@
 
 #ifndef _WIN32
     static int sleep_in_ms(long);
-#endif
+#else
+    #include <windows.h>
+#endif /* _WIN32 */
 
 void print_cvd19ssim_core_t(cvd19ssim_core_t *HCVD19) {
 
