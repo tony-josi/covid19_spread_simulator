@@ -1,3 +1,8 @@
+/*
+ * Copyright (C)    Tony Josi
+ * Date             19-05-2020
+ */
+
 #ifndef _CVD19SSIM_UTIL
 #define _CVD19SSIM_UTIL
 

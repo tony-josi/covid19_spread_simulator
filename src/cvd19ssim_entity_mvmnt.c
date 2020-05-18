@@ -1,3 +1,8 @@
+/*
+ * Copyright (C)    Tony Josi
+ * Date             19-05-2020
+ */
+
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>

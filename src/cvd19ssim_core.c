@@ -1,3 +1,8 @@
+/*
+ * Copyright (C)    Tony Josi
+ * Date             19-05-2020
+ */
+
 #include <stdio.h>
 #include <time.h>
 #include "../inc/cvd19ssim_core.h"
