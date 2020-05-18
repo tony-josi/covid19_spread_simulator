@@ -2,7 +2,7 @@
 
 COVID19 SPREAD SIMULATOR is a graphical simulator that simulates the **spread(infections), diagnosis(testing), recovery and death** of entities in a city due to COVID19 along with normal deaths and births of entities happening in the city written in pure **C**. 
 
-The simulator is highly configurable with options to configure limited set of settings using the structure feilds by init functions or building more customized verion by editing private/core define files (such as city size).
+The simulator is highly configurable with options to configure limited set of settings using the structure fields by init functions or building more customized verion by editing private/core define files (such as city size).
 
 The program outputs map of the city with entitiy locations in [portable pixmap format (PPM)](https://en.wikipedia.org/wiki/Netpbm) image frames. These frames are then used to generate video using video players that supports input from ppm image frames such as [mpv](https://en.wikipedia.org/wiki/Mpv_(media_player)).
 
