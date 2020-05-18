@@ -16,11 +16,7 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
     bool is_log_closed = 0;
     CVD19SSIM_STATUS_t ret_code = CVD19SSIM_SUCCESS;
 
-    if(cvd19ssim_core_t_init(&hCVD19) != CVD19SSIM_SUCCESS)
-        return CVD19SSIM_INIT_FAIL;
-
-    if(cvd19ssim_core_t_init_entities(&hCVD19) != CVD19SSIM_SUCCESS)
-        return CVD19SSIM_INIT_FAIL;
+    ret_code |= cvd19ssim_struct_init(&hCVD19);
         
 #if ENABLE_LOGGING
     if((log_fptr = init_log_file(LOG_FILE_PATH)) == NULL)
@@ -33,7 +29,6 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
     }
     
     while (((loop_cntr++ )< DEBUG_MAX_DAYS) && (ret_code == CVD19SSIM_SUCCESS)) {
-
 #if ENABLE_LOGGING
         if(loop_cntr <= MAX_NUM_OF_LOOPS_TO_LOG)
             cvd19ssim_log_per_day_report(&hCVD19, log_fptr);

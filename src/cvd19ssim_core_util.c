@@ -4,6 +4,18 @@
 #include "../inc/cvd19ssim_core_util.h"
 #include "../inc/cvd19ssim_ppm.h"
 
+CVD19SSIM_STATUS_t cvd19ssim_struct_init(cvd19ssim_core_t *hCVD19) {
+    
+    if(cvd19ssim_core_t_init(hCVD19) != CVD19SSIM_SUCCESS)
+        return CVD19SSIM_INIT_FAIL;
+
+    if(cvd19ssim_core_t_init_entities(hCVD19) != CVD19SSIM_SUCCESS)
+        return CVD19SSIM_INIT_FAIL;
+    
+    return CVD19SSIM_SUCCESS;
+}
+
+
 CVD19SSIM_STATUS_t cvd19ssim_daily_summary_calc(cvd19ssim_core_t *HCVD19) {
 
     HCVD19->days_passed += 1;
