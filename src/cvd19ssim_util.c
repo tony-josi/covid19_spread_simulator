@@ -63,12 +63,14 @@ void init_entity(entity_health_record_t *entities, uint32_t i, bool is_infected)
 
         init_entity_inf_cvd_report(entities, i, is_infected);
 
-        entities[i].pos_data.cur_pos.x = SQUARE_FRAME_SIZE + RAND_GEN((MAX_CITY_DEFAULT_SIZE - SQUARE_FRAME_SIZE - 5));
-        entities[i].pos_data.cur_pos.y = SQUARE_FRAME_SIZE + RAND_GEN((MAX_CITY_DEFAULT_SIZE - SQUARE_FRAME_SIZE - 5));
-        entities[i].pos_data.speed.x = MIN_SPEED + RAND_GEN(((MAX_SPEED - MIN_SPEED) + 1));
-        entities[i].pos_data.speed.y = MIN_SPEED + RAND_GEN(((MAX_SPEED - MIN_SPEED) + 1));
-
-
+        entities[i].pos_data.cur_pos.x = SQUARE_FRAME_SIZE + \
+        RAND_GEN((MAX_CITY_DEFAULT_SIZE - SQUARE_FRAME_SIZE - 5));
+        entities[i].pos_data.cur_pos.y = SQUARE_FRAME_SIZE + \
+        RAND_GEN((MAX_CITY_DEFAULT_SIZE - SQUARE_FRAME_SIZE - 5));
+        entities[i].pos_data.speed.x = MIN_SPEED + \
+        RAND_GEN(((MAX_SPEED - MIN_SPEED) + 1));
+        entities[i].pos_data.speed.y = MIN_SPEED + \
+        RAND_GEN(((MAX_SPEED - MIN_SPEED) + 1));
 }
 
 void init_entity_inf_cvd_report(entity_health_record_t *entities, uint32_t j, bool is_infected) {
@@ -103,17 +105,15 @@ void de_init_log_file(FILE *l_fptr) {
 
 bool cvd_death_chance(entity_health_record_t *entty) {
 
-    uint32_t hosp_factor = ((entty->entity_cvd_report.is_hospitalized) ? (RAND_GEN(PERCENT)) : 0);
+    uint32_t hosp_factor = \
+    ((entty->entity_cvd_report.is_hospitalized) ? (RAND_GEN(PERCENT)) : 0);
     uint32_t temp_data = entty->prob_better_immunity + hosp_factor;
     temp_data = (uint32_t) temp_data / 2;
-    //printf("hosp_factor: %d, temp_data: %d\n", hosp_factor, temp_data);
 
     if(temp_data < CVD_DEATH_FACTOR)
         return 1;
 
     return 0;
-
-
 }
 
 bool if_already_in_buffer(uint32_t *buff, uint32_t size, uint32_t item) {
@@ -146,7 +146,6 @@ bool if_already_in_buffer(uint32_t *buff, uint32_t size, uint32_t item) {
 
 
 void sleep_ms() {
-
     /* if Windows system */
     #ifdef _WIN32
         Sleep(DEFAULT_SLEEP_TIME);

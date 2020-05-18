@@ -89,7 +89,8 @@ CVD19SSIM_STATUS_t cvd19ssim_core_t_init(cvd19ssim_core_t *HCVD19) {
         ((i) * (MAX_CITY_DEFAULT_SIZE / HCVD19->num_of_hospitals_in_city));
     }
     if(!(HCVD19->entities = 
-    calloc(sizeof(entity_health_record_t), HCVD19->population_data.max_allowed_population_in_city)))
+    calloc(sizeof(entity_health_record_t), \
+    HCVD19->population_data.max_allowed_population_in_city)))
         return CVD19SSIM_FAIL;
 
     return CVD19SSIM_SUCCESS;
