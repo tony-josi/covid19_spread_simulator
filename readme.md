@@ -12,7 +12,7 @@ The program outputs population distribution in the city as [portable pixmap form
 
 ### WIP Sample
 
-![Sample WIP Output](https://github.com/TonyJosi97/covid19_spread_simulator/blob/master/cvdssim_wip_sample_1.gif)
+![Sample WIP Output](https://github.com/TonyJosi97/covid19_spread_simulator/blob/master/cvdssim_wip_sample_2.gif)
 
 #### Pixel color coding
 * **WHITE**:    White represnets non infected entities
