@@ -72,8 +72,7 @@ CVD19SSIM_STATUS_t cvd19ssim_core_t_init(cvd19ssim_core_t *HCVD19) {
     HCVD19->population_data.max_allowed_population_in_city - RAND_GEN(100);
     HCVD19->population_data.total_population = \
     HCVD19->population_data.cur_population;
-    HCVD19->initialy_infected = MIN_INITIALLY_INFECTED + \
-    RAND_GEN(HCVD19->population_data.cur_population / 20);
+    HCVD19->initialy_infected = MIN_INITIALLY_INFECTED;
     HCVD19->population_data.total_infected = HCVD19->initialy_infected;
     HCVD19->population_data.total_infected_n_died = 0;
     HCVD19->population_data.total_recovered = 0;
