@@ -53,7 +53,7 @@ int pos_move(cvd19ssim_core_t *HCVD19) {
 
 double pos_calc_distance(position_t pt1, position_t pt2) {
     
-    return (sqrt(MAG((SQUARE((pt1.x - pt2.x)) + SQUARE((pt1.y - pt2.y))))));
+    return (sqrt((SQUARE((pt1.x - pt2.x)) + SQUARE((pt1.y - pt2.y)))));
 
 }
 

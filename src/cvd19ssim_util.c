@@ -3,8 +3,8 @@
  * Date             19-05-2020
  */
 
+#define _POSIX_C_SOURCE 200809L
 #include <stdio.h>
-#include <time.h>
 #include <stdlib.h>
 #include "../inc/cvd19ssim_util.h"
 #include "../inc/cvd19ssim_core.h"
@@ -12,6 +12,7 @@
 #include "../inc/cvd19ssim_ppm.h"
 
 #ifndef _WIN32
+    #include <time.h>
     static int sleep_in_ms(long);
 #else
     #include <windows.h>
