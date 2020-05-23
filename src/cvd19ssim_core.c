@@ -17,31 +17,25 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
     srand(time(0)); 
     cvd19ssim_core_t hCVD19;
     uint64_t loop_cntr = 0;
-    FILE *log_fptr;
-    bool is_log_closed = 0;
     CVD19SSIM_STATUS_t ret_code = CVD19SSIM_SUCCESS;
 
     ret_code |= cvd19ssim_struct_init(&hCVD19);
 
 #if ENABLE_LOGGING
+    FILE *log_fptr;
     if((log_fptr = init_log_file(LOG_FILE_PATH)) == NULL)
         return CVD19SSIM_INIT_FAIL;
 #endif /* ENABLE_LOGGING */
 
     for(int i = 0; i < STILL_FRAMES_AT_START; i++) {
         sleep_ms();
-        output_current_frame_ppm(&hCVD19);
+        //output_current_frame_ppm(&hCVD19);
     }
     
-    while (((loop_cntr++ )< DEBUG_MAX_DAYS) && (ret_code == CVD19SSIM_SUCCESS)) {
+    while (((loop_cntr++) < DEBUG_MAX_DAYS) && (ret_code == CVD19SSIM_SUCCESS)) {
 #if ENABLE_LOGGING
         if(loop_cntr <= MAX_NUM_OF_LOOPS_TO_LOG)
             cvd19ssim_log_per_day_report(&hCVD19, log_fptr);
-        else
-            if(!is_log_closed) {
-                de_init_log_file(log_fptr);
-                is_log_closed = 1;
-            }
 #endif /* ENABLE_LOGGING */
 
         sleep_ms();
@@ -57,13 +51,16 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
         ret_code |= cvd19ssim_daily_diagnosis(&hCVD19);
         ret_code |= cvd19ssim_daily_recovery(&hCVD19);
         
-        output_current_frame_ppm(&hCVD19);
+        //output_current_frame_ppm(&hCVD19);
     }
     
     if(cvd19ssim_core_t_hosp_deinit(&hCVD19) != CVD19SSIM_SUCCESS)
         return CVD19SSIM_INIT_FAIL;
     if(cvd19ssim_core_t_entity_deinit(&hCVD19) != CVD19SSIM_SUCCESS)
         return CVD19SSIM_INIT_FAIL;
+#if ENABLE_LOGGING
+    de_init_log_file(log_fptr);
+#endif /* ENABLE_LOGGING */
 
     return CVD19SSIM_SUCCESS;
 }
