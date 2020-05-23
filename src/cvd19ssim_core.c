@@ -22,7 +22,7 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
     CVD19SSIM_STATUS_t ret_code = CVD19SSIM_SUCCESS;
 
     ret_code |= cvd19ssim_struct_init(&hCVD19);
-        
+
 #if ENABLE_LOGGING
     if((log_fptr = init_log_file(LOG_FILE_PATH)) == NULL)
         return CVD19SSIM_INIT_FAIL;
@@ -30,7 +30,7 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
 
     for(int i = 0; i < STILL_FRAMES_AT_START; i++) {
         sleep_ms();
-        //output_current_frame_ppm(&hCVD19);
+        output_current_frame_ppm(&hCVD19);
     }
     
     while (((loop_cntr++ )< DEBUG_MAX_DAYS) && (ret_code == CVD19SSIM_SUCCESS)) {
@@ -57,9 +57,12 @@ CVD19SSIM_STATUS_t cvd19ssim_RUNNER_MAIN() {
         ret_code |= cvd19ssim_daily_diagnosis(&hCVD19);
         ret_code |= cvd19ssim_daily_recovery(&hCVD19);
         
-        //output_current_frame_ppm(&hCVD19);
+        output_current_frame_ppm(&hCVD19);
     }
-    if(cvd19ssim_core_t_deinit(&hCVD19) != CVD19SSIM_SUCCESS)
+    
+    if(cvd19ssim_core_t_hosp_deinit(&hCVD19) != CVD19SSIM_SUCCESS)
+        return CVD19SSIM_INIT_FAIL;
+    if(cvd19ssim_core_t_entity_deinit(&hCVD19) != CVD19SSIM_SUCCESS)
         return CVD19SSIM_INIT_FAIL;
 
     return CVD19SSIM_SUCCESS;

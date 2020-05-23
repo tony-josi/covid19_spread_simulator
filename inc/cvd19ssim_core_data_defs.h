@@ -18,9 +18,9 @@
 
 #define ENABLE_LOGGING                          1
 
-#define DEBUG_MAX_DAYS                          250
+#define DEBUG_MAX_DAYS                          50
 
-#define MAX_NUM_OF_LOOPS_TO_LOG                 250
+#define MAX_NUM_OF_LOOPS_TO_LOG                 50
 
 #define MAX_SPEED                               2
 

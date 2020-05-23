@@ -102,9 +102,16 @@ CVD19SSIM_STATUS_t cvd19ssim_core_t_init(cvd19ssim_core_t *HCVD19) {
 
 }
 
-CVD19SSIM_STATUS_t cvd19ssim_core_t_deinit(cvd19ssim_core_t *HCVD19) {
+CVD19SSIM_STATUS_t cvd19ssim_core_t_entity_deinit(cvd19ssim_core_t *HCVD19) {
 
     free(HCVD19->entities);
+    return CVD19SSIM_SUCCESS;
+
+}
+
+CVD19SSIM_STATUS_t cvd19ssim_core_t_hosp_deinit(cvd19ssim_core_t *HCVD19) {
+
+    free(HCVD19->hospital_locations);
     return CVD19SSIM_SUCCESS;
 
 }
