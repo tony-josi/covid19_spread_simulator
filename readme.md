@@ -1,6 +1,6 @@
 ## COVID 19 GRAPHICAL SPREAD SIMULATOR
 
-COVID19 SPREAD SIMULATOR is a graphical simulator that simulates the **spread(infections), diagnosis(testing), recovery and death** among population in a city due to COVID19 along with normal deaths and births of population happening in the city, written in pure **C**. 
+COVID19 SPREAD SIMULATOR is a graphical simulator that simulates the **spread(infections), diagnosis(testing), recovery and death** among population in a city due to COVID19 along with normal deaths and births of population happening in the city.
 
 The simulator is highly configurable with options to configure limited set of settings using the structure fields by init functions, or building more customized verion by editing private/core define files (such as city size).
 
@@ -15,10 +15,10 @@ The program outputs population distribution in the city as [portable pixmap form
 ![Sample WIP Output](https://github.com/TonyJosi97/covid19_spread_simulator/blob/master/cvdssim_wip_sample_2.gif)
 
 #### Pixel color coding
-* **WHITE**:    White represnets non infected entities
+* **WHITE**:    White represents non infected entities
 * **BLUE**:     Blue blocks represent hospitals
-* **GREEN**:    Green represents COVID recovered entities
-* **YELLOW**:   Entities infected and quarantined
+* **GREEN**:    Green represents COVID19 recovered entities
+* **PINK**:     Entities infected and quarantined
 
 #### Initial Stats:
 ```
